@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="65dp"
+        android:gravity="center"
+        android:text="@string/app"
+        android:textColor="@color/back_text"
+        android:textSize="121px"
+        tools:ignore="PxUsage,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/name_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/nome"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/font_color"
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="75dp"
+        android:background="@drawable/border_button_log"
+        android:text="@string/login"
+        android:textColor="@color/back_text"
+
+        tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cad_btn"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="75dp"
+        android:background="@drawable/border_button_cad"
+        android:insetTop="6dp"
+        android:text="@string/cadastrar"
+        android:textColor="@color/back_text"
+        tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/icon_silhueta"
+        android:layout_width="213dp"
+        android:layout_height="191dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/silhueteicon"
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/todo" />
+
+</LinearLayout>

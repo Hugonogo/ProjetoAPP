@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppForm</string>
+    <string name="login">Login</string>
+    <string name="button">Button</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome</string>
+    <string name="senha">Senha</string>
+    <string name="app">APP</string>
+    <string name="todo">TODO</string>
+</resources>
