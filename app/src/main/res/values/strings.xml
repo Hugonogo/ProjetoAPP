@@ -7,4 +7,13 @@
     <string name="senha">Senha</string>
     <string name="app">APP</string>
     <string name="todo">TODO</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">Email</string>
+    <string name="proximo">Próximo</string>
+    <string name="supino">TODO</string>
+    <string name="peso">Peso</string>
+    <string name="altura">Altura</string>
+    <string name="sexo">Sexo</string>
+    <string name="idade">Idade</string>
+    <string name="concluir">Concluir</string>
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient2"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Formulario2">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="176dp"
+        android:layout_height="212dp"
+        app:srcCompat="@drawable/runicon" />
+
+    <EditText
+        android:id="@+id/peso_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/peso"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+    <EditText
+        android:id="@+id/altura_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/altura"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/sex_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/sexo"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+    <EditText
+        android:id="@+id/idade_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:autofillHints=""
+        android:background="@drawable/border_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/idade"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+
+        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/concluido_btn"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="75dp"
+        android:background="@drawable/button_prox"
+        android:text="@string/concluir"
+        android:textColor="@color/color_prox_text"
+
+        android:textSize="20sp"
+        tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+
+
+</LinearLayout>

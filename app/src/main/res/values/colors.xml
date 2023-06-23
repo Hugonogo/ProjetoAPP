@@ -11,4 +11,5 @@
     <color name="font_color">#969696</color>
     <color name="log_color">#05D607</color>
     <color name="cad_btn_color">#00ABFF</color>
+    <color name="color_prox_text">#F9FDFF</color>
 </resources>
