@@ -16,4 +16,5 @@
     <string name="sexo">Sexo</string>
     <string name="idade">Idade</string>
     <string name="concluir">Concluir</string>
+    <string name="run">running</string>
 </resources>
