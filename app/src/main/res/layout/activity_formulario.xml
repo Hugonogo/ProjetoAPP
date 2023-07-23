@@ -20,7 +20,7 @@
         tools:ignore="VisualLintBounds" />
 
     <EditText
-        android:id="@+id/name_user"
+        android:id="@+id/edt_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -38,7 +38,7 @@
         tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
 
     <EditText
-        android:id="@+id/pass_user"
+        android:id="@+id/edt_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -55,7 +55,7 @@
 
         tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
     <EditText
-        android:id="@+id/email_user"
+        android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -72,7 +72,7 @@
 
         tools:ignore="TextContrastCheck,TextFields,VisualLintTextFieldSize" />
     <EditText
-        android:id="@+id/tel_user"
+        android:id="@+id/edt_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -90,7 +90,7 @@
         tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/prox_btn"
+        android:id="@+id/btn_prox"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_marginLeft="75dp"

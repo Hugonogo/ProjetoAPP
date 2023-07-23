@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "825259696167",
+    "project_id": "appform-5a0f2",
+    "storage_bucket": "appform-5a0f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825259696167:android:e4ab85e9deb76e1b86ae02",
+        "android_client_info": {
+          "package_name": "com.example.appform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825259696167-e5cusmgm3cf19hll8mm62he7v2v9tfuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdlLUN1rhxNRjdTQPh2XDEYdVrZxwa2XY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825259696167-e5cusmgm3cf19hll8mm62he7v2v9tfuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
