@@ -1,12 +1,12 @@
 package com.example.appform;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appform.databinding.ActivityFormularioBinding;
 import com.example.appform.databinding.CarregandoLayoutBinding;
@@ -53,17 +53,16 @@ public class Formulario extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(
                         task -> {
                             if( task.isSuccessful() ){
-                                usuariosRef.child(
-                                        Base64.encodeToString(email.getBytes(), Base64.DEFAULT)
-                                ).setValue(
-                                        modeloUsuario
-                                ).addOnCompleteListener(task1 -> {
+                                DatabaseReference novoUsuarioRef = usuariosRef.push();
+                                novoUsuarioRef.setValue(modeloUsuario).addOnCompleteListener(task1 -> {
+
                                     if ( task1.isSuccessful() ){
                                         dialog_carregando.dismiss();
                                         startActivity(
                                             new Intent(getApplicationContext(), Formulario2.class)
                                         );
                                     }
+
                                     else{
                                         dialog_carregando.dismiss();
                                         Toast.makeText(

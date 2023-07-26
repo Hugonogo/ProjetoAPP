@@ -12,6 +12,9 @@
         android:theme="@style/Theme.AppForm"
         tools:targetApi="31">
         <activity
+            android:name=".StepCount"
+            android:exported="false" />
+        <activity
             android:name=".Formulario2"
             android:exported="false" />
         <activity

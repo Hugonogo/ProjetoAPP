@@ -70,7 +70,7 @@
         tools:ignore="VisualLintButtonSize,TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cad_btn"
+        android:id="@+id/btn_cad"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_gravity="center"

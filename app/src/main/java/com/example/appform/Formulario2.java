@@ -64,29 +64,27 @@ public class Formulario2 extends AppCompatActivity {
                     !altura_texto.isEmpty() ){
 
                 dialog_carregando.show();
-
-                usuariosRef.child(
-                        Base64.encodeToString(user.getEmail().getBytes(), Base64.DEFAULT)
-                ).addListenerForSingleValueEvent(new ValueEventListener() {
+                usuariosRef.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener()  {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        ModeloUsuario modeloUsuario = snapshot.getValue(ModeloUsuario.class);
+                        ModeloUsuario modeloUsuario;
+                        if (snapshot.exists()) {
+                            modeloUsuario = snapshot.getValue(ModeloUsuario.class);
+                        } else {
+                            modeloUsuario = new ModeloUsuario();
+                        }
                         modeloUsuario.setAltura(altura);
                         modeloUsuario.setIdade(idade);
                         modeloUsuario.setPeso(peso);
                         modeloUsuario.setSexo(sexo);
 
-                        usuariosRef.child(
-                                Base64.encodeToString(user.getEmail().getBytes(), Base64.DEFAULT)
-                        ).setValue(
-                                modeloUsuario
-                        ).addOnCompleteListener(task -> {
-                            if ( task.isSuccessful() ){
+                        usuariosRef.child(user.getUid()).setValue(modeloUsuario).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
                                 dialog_carregando.dismiss();
                                 Toast.makeText(Formulario2.this, "Cadastro completo!", Toast.LENGTH_SHORT).show();
-                            }else{
+                            } else {
                                 dialog_carregando.dismiss();
-                                Toast.makeText(Formulario2.this, "Errp ao realizar cadastro", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Formulario2.this, "Erro ao realizar cadastro", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

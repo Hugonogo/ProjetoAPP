@@ -17,4 +17,9 @@
     <string name="idade">Idade</string>
     <string name="concluir">Concluir</string>
     <string name="run">running</string>
+    <string name="cloud">TODO</string>
+    <string name="midleCloud">TODO</string>
+    <string name="iniciar_contador">Iniciar Contador</string>
+    <string name="passos_0">Passos: 0</string>
+    <string name="reset">Reset</string>
 </resources>

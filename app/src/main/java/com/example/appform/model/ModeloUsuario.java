@@ -2,7 +2,6 @@ package com.example.appform.model;
 
 public class ModeloUsuario {
     String nome,email,telefone;
-
     int idade = 0;
     String sexo = "";
     Double altura = 0.0;
