@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,14 +8,30 @@
     android:orientation="vertical"
     android:gravity="center">
 
-
-    <TextView
-        android:id="@+id/Count_TextView"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:padding="16dp"
-        android:text="@string/passos_0"
-        android:textSize="24sp" />
+        tools:ignore="UselessParent">
 
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/progres_steps"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/circle_one"
+            android:progressDrawable="@drawable/progress_circle" />
+
+        <TextView
+            android:id="@+id/Count_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"
+            android:text="@string/passos"
+            android:textColor="#1565C0"
+            android:textSize="30sp"
+            tools:ignore="VisualLintOverlap" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

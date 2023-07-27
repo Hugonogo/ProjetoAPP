@@ -22,4 +22,5 @@
     <string name="iniciar_contador">Iniciar Contador</string>
     <string name="passos_0">Passos: 0</string>
     <string name="reset">Reset</string>
+    <string name="passos">Passos:</string>
 </resources>
