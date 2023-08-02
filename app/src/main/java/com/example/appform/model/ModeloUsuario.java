@@ -1,6 +1,8 @@
 package com.example.appform.model;
 
-public class ModeloUsuario {
+import java.io.Serializable;
+
+public class ModeloUsuario implements Serializable {
     String nome,email,telefone;
     int idade = 0;
     String sexo = "";
