@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void configurarAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(Formulario.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setView(CarregandoLayoutBinding.inflate(getLayoutInflater()).getRoot());
         builder.setCancelable(false);
         dialog_carregando = builder.create();
