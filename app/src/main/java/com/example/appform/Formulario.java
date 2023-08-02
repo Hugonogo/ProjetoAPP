@@ -3,10 +3,12 @@ package com.example.appform;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.appform.databinding.ActivityFormularioBinding;
 import com.example.appform.databinding.CarregandoLayoutBinding;
@@ -30,14 +32,16 @@ public class Formulario extends AppCompatActivity {
         vb = ActivityFormularioBinding.inflate(getLayoutInflater());
         setContentView(vb.getRoot());
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         configurarAlert();
 
         vb.btnProx.setOnClickListener( viewProx -> {
 
-            nome = vb.edtNome.getText().toString();
-            senha = vb.edtPass.getText().toString();
-            email = vb.edtEmail.getText().toString();
-            telefone = vb.edtTel.getText().toString();
+            nome = vb.edtNome.getText().toString().trim();
+            senha = vb.edtPass.getText().toString().trim();
+            email = vb.edtEmail.getText().toString().trim();
+            telefone = vb.edtTel.getText().toString().trim();
 
 
             if (
@@ -53,18 +57,28 @@ public class Formulario extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(
                         task -> {
                             if( task.isSuccessful() ){
-                                DatabaseReference novoUsuarioRef = usuariosRef.push();
+
+                                String id = Base64.encodeToString(email.getBytes(), Base64.DEFAULT);
+
+                                DatabaseReference novoUsuarioRef = usuariosRef.child(
+                                        id
+                                );
+
                                 novoUsuarioRef.setValue(modeloUsuario).addOnCompleteListener(task1 -> {
 
                                     if ( task1.isSuccessful() ){
                                         dialog_carregando.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), Formulario2.class);
+                                        i.putExtra("id", id);
                                         startActivity(
-                                            new Intent(getApplicationContext(), Formulario2.class)
+                                            i
                                         );
                                     }
 
                                     else{
                                         dialog_carregando.dismiss();
+                                        Log.d("bucetinha", id);
+                                        Log.d("bucetinha", task1.toString());
                                         Toast.makeText(
                                                 Formulario.this, "Erro ao fazer cadastro no banco, tente novamente!", Toast.LENGTH_LONG
                                         ).show();

@@ -3,9 +3,13 @@ package com.example.appform;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.appform.databinding.ActivityFormulario2Binding;
@@ -21,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 
 public class Formulario2 extends AppCompatActivity {
@@ -41,8 +47,11 @@ public class Formulario2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         vb = ActivityFormulario2Binding.inflate(getLayoutInflater());
         setContentView(vb.getRoot());
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         configurarAlert();
+
+        // pega o id do usuário do primeiro forumalrio
+        String id = getIntent().getStringExtra("id");
 
         if ( user == null){
             Toast.makeText(this, "Usuarios não cadastrado ainda.", Toast.LENGTH_SHORT).show();
@@ -64,7 +73,7 @@ public class Formulario2 extends AppCompatActivity {
                     !altura_texto.isEmpty() ){
 
                 dialog_carregando.show();
-                usuariosRef.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener()  {
+                usuariosRef.child(id).addListenerForSingleValueEvent(new ValueEventListener()  {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         ModeloUsuario modeloUsuario;
@@ -78,11 +87,13 @@ public class Formulario2 extends AppCompatActivity {
                         modeloUsuario.setPeso(peso);
                         modeloUsuario.setSexo(sexo);
 
-                        usuariosRef.child(user.getUid()).setValue(modeloUsuario).addOnCompleteListener(task -> {
+                        usuariosRef.child(id).setValue(modeloUsuario).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 dialog_carregando.dismiss();
+                                startActivity(new Intent(getApplicationContext(), StepCount.class));
                                 Toast.makeText(Formulario2.this, "Cadastro completo!", Toast.LENGTH_SHORT).show();
                             } else {
+                                Log.d("erroCadastro", task.getResult().toString());
                                 dialog_carregando.dismiss();
                                 Toast.makeText(Formulario2.this, "Erro ao realizar cadastro", Toast.LENGTH_SHORT).show();
                             }

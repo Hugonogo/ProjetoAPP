@@ -21,7 +21,7 @@
         tools:ignore="PxUsage,TextContrastCheck" />
 
     <EditText
-        android:id="@+id/name_user"
+        android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -30,7 +30,7 @@
         android:background="@drawable/border_text"
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/nome"
+        android:hint="@string/email"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
