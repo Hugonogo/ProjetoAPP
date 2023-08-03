@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,89 +7,286 @@
     android:background="@drawable/background_gradient"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Formulario">
 
-    <EditText
-        android:id="@+id/edt_nome"
-        android:layout_width="345dp"
-        android:layout_height="53dp"
+    tools:context=".FormularioActivity">
+    <LinearLayout
+        android:layout_width="361dp"
+        android:layout_height="481dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border_background"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        tools:ignore="TextSizeCheck">
 
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/nome"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        android:layout_marginBottom="35dp"
-        tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="168dp" />
+        <TextView
+            android:id="@+id/text_preencher_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
 
-    <EditText
-        android:id="@+id/edt_pass"
-        android:layout_width="345dp"
-        android:layout_height="53dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/senha"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        android:layout_marginBottom="35dp"
-        tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="238dp" />
+            android:text="@string/preencha_o_formul_rio_com_suas_informa_es"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/edt_email"
-        android:layout_width="345dp"
-        android:layout_height="53dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/email"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        android:layout_marginBottom="35dp"
-        tools:ignore="MissingConstraints,TextContrastCheck,TextFields,VisualLintTextFieldSize,DuplicateClickableBoundsCheck"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="304dp" />
+        <TextView
+            android:id="@+id/txt_cadastar_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
-    <EditText
-        android:id="@+id/edt_tel"
-        android:layout_width="345dp"
-        android:layout_height="53dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/telefone"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        android:layout_marginBottom="35dp"
-        tools:ignore="MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="372dp" />
+        <EditText
+            android:id="@+id/edt_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_prox"
-        android:layout_width="300dp"
-        android:layout_height="72dp"
-        android:background="@drawable/button_prox"
-        android:text="@string/proximo"
-        android:textColor="@color/color_prox_text"
+            android:layout_marginRight="25dp"
 
-        android:textSize="20sp"
-        tools:ignore="MissingConstraints,TextContrastCheck,VisualLintButtonSize"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="475dp" />
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_seu_nome"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="168dp" />
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txt_cadastar_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_seu_email_cadastro"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="MissingConstraints,TextContrastCheck,TextFields,VisualLintTextFieldSize,DuplicateClickableBoundsCheck"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="304dp" />
+
+        <TextView
+            android:id="@+id/txt_cadastrar_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/senha"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_sua_senha_cadastro"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="238dp" />
+
+
+        <TextView
+            android:id="@+id/txt_cadastar_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/telefone"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_seu_telefone"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="372dp" />
+
+        <TextView
+            android:id="@+id/txt_cadastar_peso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/peso"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_peso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_o_seu_peso"
+            android:inputType="number|numberDecimal"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/txt_cadastrar_altura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/altura"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_altura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/selecione_sua_altura"
+            android:inputType="number|numberDecimal"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sexo"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_sexo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/selecione_seu_sexo"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/txt_cadastar_idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/idade"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/edt_idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_sua_idade"
+            android:inputType="number|numberSigned"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_concluir"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="75dp"
+            android:background="@drawable/border_button"
+            android:text="@string/concluir"
+            android:textColor="@color/color_prox_text"
+            android:textSize="20sp"
+            tools:ignore="VisualLintButtonSize,TextContrastCheck"
+            tools:text="Concluir Cadastro"
+            android:layout_marginBottom="15dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

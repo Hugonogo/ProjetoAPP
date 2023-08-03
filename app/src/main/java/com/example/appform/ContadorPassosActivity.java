@@ -2,7 +2,6 @@ package com.example.appform;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class StepCount extends AppCompatActivity implements SensorEventListener {
+public class ContadorPassosActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private int stepCount = 0;

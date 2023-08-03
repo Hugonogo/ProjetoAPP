@@ -23,4 +23,17 @@
     <string name="passos_0">Passos: 0</string>
     <string name="reset">Reset</string>
     <string name="passos">Passos:</string>
+    <string name="preencha_o_formul_rio_com_suas_informa_es">Preencha suas informações</string>
+    <string name="loginMaiusculo">LOGIN</string>
+    <string name="preencha_os_campos_com_suas_informa_es">preencha os campos com suas informações</string>
+    <string name="digite_sua_senha">Digite sua senha</string>
+    <string name="digite_seu_email">Digite seu email</string>
+    <string name="digite_seu_nome">digite seu nome</string>
+    <string name="digite_seu_telefone">digite seu telefone</string>
+    <string name="digite_o_seu_peso">digite o seu peso</string>
+    <string name="selecione_sua_altura">selecione sua altura</string>
+    <string name="selecione_seu_sexo">selecione seu sexo</string>
+    <string name="digite_sua_idade">digite sua idade</string>
+    <string name="digite_seu_email_cadastro">digite seu email</string>
+    <string name="digite_sua_senha_cadastro">digite sua senha</string>
 </resources>

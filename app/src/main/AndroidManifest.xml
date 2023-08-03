@@ -14,16 +14,16 @@
         android:theme="@style/Theme.AppForm"
         tools:targetApi="31">
         <activity
-            android:name=".StepCount"
+            android:name=".ContadorPassosActivity"
             android:exported="false" />
         <activity
             android:name=".Formulario2"
             android:exported="false" />
         <activity
-            android:name=".Formulario"
+            android:name=".FormularioActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginOuCadastroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

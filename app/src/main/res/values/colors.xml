@@ -7,9 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="back_text">#F9FDFF</color>
+    <color name="back_text">#DDE7EC</color>
     <color name="font_color">#969696</color>
     <color name="log_color">#05D607</color>
-    <color name="cad_btn_color">#00ABFF</color>
+    <color name="btn_color">#f72585</color>
     <color name="color_prox_text">#F9FDFF</color>
+    <color name="corDeFundo">#F0F0F0</color>
+    <color name="corGradienteInicio">#24077a</color>
+    <color name="corGradienteCentro">#480ca8</color>
+    <color name="corGradienteFim">#6a33cc</color>
 </resources>
