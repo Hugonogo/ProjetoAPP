@@ -2,11 +2,13 @@ package com.example.appform;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,13 +16,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
+import java.util.Calendar;
 
 public class ContadorPassosActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private int stepCount = 0;
     private int previewCount = 0;
+    private int steptaken;
     private boolean isSensorPresent;
     Context context;
     private TextView countTextView;
@@ -28,7 +31,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +40,14 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         circleBar = findViewById(R.id.progres_steps);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
+        countTextView.setText("Passos: " + steptaken);
 
-        resetStep();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         possuiSensor();
-
+        loadData();
+        resetStep();
 
     }
 
@@ -69,10 +73,12 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor == stepCounterSensor) {
             stepCount = (int) sensorEvent.values[0];
-            int steptaken = stepCount - previewCount;
+            steptaken = stepCount - previewCount;
+
             countTextView.setText("Passos: " + steptaken);
 
             circleBar.setProgress(steptaken);
+            saveData();
         }
     }
 
@@ -96,18 +102,33 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
     @SuppressLint("SetTextI18n")
     public void resetStep(){
-
-        countTextView.setOnClickListener(viewClick -> Snackbar.make(viewClick, "Segure Para Resetar o Contador", Snackbar.LENGTH_SHORT).show());
-
-        countTextView.setOnLongClickListener(viewLongClick ->{
-
+        Calendar calendar = Calendar.getInstance();
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuto = calendar.get(Calendar.MINUTE);
+        if (hora == 0 && minuto == 0){
             previewCount = stepCount;
-            countTextView.setText("Passos: 0");
-            circleBar.setProgress(0);
-            return true;
-        });
+            steptaken = 0;
+            saveData();
+            countTextView.setText("Passos: "+steptaken);
+            circleBar.setProgress(steptaken);
+        }
 
     }
 
 
+    private void saveData(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("chave-passos", previewCount);
+        editor.apply();
+
+    }
+    private void loadData(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        steptaken = preferences.getInt("chave-passos", 0);
+        previewCount = steptaken;
+
+
+    }
 }
+

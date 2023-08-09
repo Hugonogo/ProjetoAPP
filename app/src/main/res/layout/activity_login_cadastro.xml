@@ -13,6 +13,7 @@
         android:layout_width="361dp"
         android:layout_height="481dp"
         android:layout_gravity="center"
+        android:padding="5dp"
         android:background="@drawable/border_background"
         android:orientation="vertical"
         tools:ignore="TextSizeCheck"
@@ -26,8 +27,9 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/loginMaiusculo"
+            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="121px"
+            android:textSize="90px"
 
             tools:ignore="PxUsage,TextContrastCheck" />
 
@@ -35,7 +37,7 @@
             android:id="@+id/txt_preencha_infos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="@string/preencha_os_campos_com_suas_informa_es"
             android:textSize="16sp" />
