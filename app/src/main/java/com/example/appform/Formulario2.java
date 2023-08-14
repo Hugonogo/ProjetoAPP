@@ -5,18 +5,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.appform.databinding.ActivityFormulario2Binding;
 import com.example.appform.databinding.CarregandoLayoutBinding;
 import com.example.appform.model.ModeloUsuario;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,8 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 
 public class Formulario2 extends AppCompatActivity {
@@ -90,7 +84,7 @@ public class Formulario2 extends AppCompatActivity {
                         usuariosRef.child(id).setValue(modeloUsuario).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 dialog_carregando.dismiss();
-                                startActivity(new Intent(getApplicationContext(), StepCount.class));
+                                startActivity(new Intent(getApplicationContext(), ContadorPassosActivity.class));
                                 Toast.makeText(Formulario2.this, "Cadastro completo!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.d("erroCadastro", task.getResult().toString());

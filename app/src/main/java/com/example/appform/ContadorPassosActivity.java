@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,21 +16,30 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class StepCount extends AppCompatActivity implements SensorEventListener {
+import java.util.Calendar;
+
+public class ContadorPassosActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private int stepCount = 0;
     private int previewCount = 0;
+    private int steptaken;
     private boolean isSensorPresent;
     Context context;
     private TextView countTextView;
     private ProgressBar circleBar;
 
+    private DatabaseReference passosRef;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-    @SuppressLint("MissingInflatedId")
+
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +48,24 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
         circleBar = findViewById(R.id.progres_steps);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
+        countTextView.setText("Passos: " + steptaken);
 
-        resetStep();
+        if ( user != null){
+            passosRef = FirebaseDatabase.getInstance()
+                        .getReference("usuarios")
+                        .child(user.getUid())
+                        .child("passos");
+
+        }else{
+            Toast.makeText(context, "Faça login primeiro!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         possuiSensor();
-
+        loadData();
+        resetStep();
 
     }
 
@@ -70,11 +91,18 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor == stepCounterSensor) {
             stepCount = (int) sensorEvent.values[0];
-            int steptaken = stepCount - previewCount;
+            steptaken = stepCount - previewCount;
+
             countTextView.setText("Passos: " + steptaken);
+            atualizarPassoFirebase(steptaken);
 
             circleBar.setProgress(steptaken);
+            saveData();
         }
+    }
+
+    public void atualizarPassoFirebase(int passos){
+            passosRef.setValue(passos);
     }
 
     @Override
@@ -97,18 +125,33 @@ public class StepCount extends AppCompatActivity implements SensorEventListener 
 
     @SuppressLint("SetTextI18n")
     public void resetStep(){
-
-        countTextView.setOnClickListener(viewClick -> Snackbar.make(viewClick, "Segure Para Resetar o Contador", Snackbar.LENGTH_SHORT).show());
-
-        countTextView.setOnLongClickListener(viewLongClick ->{
-
+        Calendar calendar = Calendar.getInstance();
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuto = calendar.get(Calendar.MINUTE);
+        if (hora == 0 && minuto == 0){
             previewCount = stepCount;
-            countTextView.setText("Passos: 0");
-            circleBar.setProgress(0);
-            return true;
-        });
+            steptaken = 0;
+            saveData();
+            countTextView.setText("Passos: "+steptaken);
+            circleBar.setProgress(steptaken);
+        }
 
     }
 
 
+    private void saveData(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("chave-passos", previewCount);
+        editor.apply();
+
+    }
+    private void loadData(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        steptaken = preferences.getInt("chave-passos", 0);
+        previewCount = steptaken;
+
+
+    }
 }
+

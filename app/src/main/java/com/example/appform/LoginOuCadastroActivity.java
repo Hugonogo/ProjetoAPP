@@ -1,25 +1,20 @@
 package com.example.appform;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.appform.databinding.ActivityFormularioBinding;
-import com.example.appform.databinding.ActivityMainBinding;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.example.appform.databinding.ActivityLoginCadastroBinding;
 import com.example.appform.databinding.CarregandoLayoutBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginOuCadastroActivity extends AppCompatActivity {
 
     private AlertDialog dialog_carregando;
     private Button btnCad;
@@ -28,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
     
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private ActivityMainBinding vb ;
+    private ActivityLoginCadastroBinding vb ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vb = ActivityMainBinding.inflate(getLayoutInflater());
+        vb = ActivityLoginCadastroBinding.inflate(getLayoutInflater());
         setContentView(vb.getRoot());
         btnCad = findViewById(R.id.btn_cad);
         btnLogin = findViewById(R.id.login_btn);
@@ -42,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         if ( user != null){
             Toast.makeText(this, "Bem-vindo de volta!", Toast.LENGTH_SHORT).show();
             startActivity(
-                    new Intent(getApplicationContext(), StepCount.class)
+                    new Intent(getApplicationContext(), ContadorPassosActivity.class)
             );
         }else{
             Toast.makeText(this, "Faça login ou se cadastre!", Toast.LENGTH_SHORT).show();
@@ -51,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(vLogin ->{
             dialog_carregando.show();
             String email, senha;
-            email = vb.edtEmail.getText().toString().trim();
-            senha = vb.Password.getText().toString().trim();
+            email = vb.edtDigiteEmail.getText().toString().trim();
+            senha = vb.edtDigitePassword.getText().toString().trim();
 
             if ( !email.isEmpty()  && !senha.isEmpty()){
                 auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(task -> {
                     if ( task.isSuccessful() ){
                         dialog_carregando.dismiss();
                         startActivity(
-                                new Intent(getApplicationContext(), StepCount.class)
+                                new Intent(getApplicationContext(), ContadorPassosActivity.class)
                         );
                     }else{
                         dialog_carregando.dismiss();
-                        Toast.makeText(MainActivity.this, "Credenciais erradas.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginOuCadastroActivity.this, "Credenciais erradas.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }else{
@@ -77,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
         btnCad.setOnClickListener( viewCad -> {
             startActivity(
-                    new Intent(getApplicationContext(), Formulario.class)
+                    new Intent(getApplicationContext(), FormularioActivity.class)
             );
         });
     }
 
     public void configurarAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginOuCadastroActivity.this);
         builder.setView(CarregandoLayoutBinding.inflate(getLayoutInflater()).getRoot());
         builder.setCancelable(false);
         dialog_carregando = builder.create();

@@ -1,7 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:startColor="#01AAC2"
-        android:endColor="#D6E8FB"
-        android:angle="270"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Define a cor de fundo sólida -->
+    <item android:drawable="@color/corDeFundo" />
+
+    <!-- Define um gradiente para dar mais profundidade -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="45"
+                android:startColor="@color/corGradienteInicio"
+                android:centerColor="@color/corGradienteCentro"
+                android:endColor="@color/corGradienteFim" />
+        </shape>
+    </item>
+</layer-list>
