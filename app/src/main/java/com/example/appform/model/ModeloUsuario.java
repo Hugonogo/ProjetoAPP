@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class ModeloUsuario implements Serializable {
     String nome,email,telefone;
     int idade = 0;
+
+    int passos = 0;
     String sexo = "";
     Double altura = 0.0;
     Double peso = 0.0;
@@ -12,14 +14,23 @@ public class ModeloUsuario implements Serializable {
     public ModeloUsuario() {
     }
 
-    public ModeloUsuario(String nome, String email, String telefone, int idade, String sexo, Double altura, Double peso) {
+    public ModeloUsuario(String nome, String email, String telefone, int idade, int passos, String sexo, Double altura, Double peso) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.idade = idade;
+        this.passos = passos;
         this.sexo = sexo;
         this.altura = altura;
         this.peso = peso;
+    }
+
+    public int getPassos() {
+        return passos;
+    }
+
+    public void setPassos(int passos) {
+        this.passos = passos;
     }
 
     public String getNome() {
