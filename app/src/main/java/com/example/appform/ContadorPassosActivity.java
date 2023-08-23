@@ -1,14 +1,20 @@
 package com.example.appform;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ContadorPassosActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
@@ -33,6 +41,9 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     Context context;
     private TextView countTextView;
     private ProgressBar circleBar;
+
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Timer midnightResetTimer = new Timer();
 
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -48,7 +59,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         circleBar = findViewById(R.id.progres_steps);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
-        countTextView.setText("Passos: " + steptaken);
+        updateStepCountView();
 
         if ( user != null){
             passosRef = FirebaseDatabase.getInstance()
@@ -65,7 +76,8 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
         possuiSensor();
         loadData();
-        resetStep();
+        scheduleAppOpen();
+        MidnightReset();
 
     }
 
@@ -93,10 +105,8 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             stepCount = (int) sensorEvent.values[0];
             steptaken = stepCount - previewCount;
 
-            countTextView.setText("Passos: " + steptaken);
+            updateStepCountView();
             atualizarPassoFirebase(steptaken);
-
-            circleBar.setProgress(steptaken);
             saveData();
         }
     }
@@ -122,23 +132,75 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
     }
+    public void scheduleAppOpen() {
+        Log.d("log", "scheduleAppOpen: funcionando!!!!");
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AbrirAppMidNight.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-    @SuppressLint("SetTextI18n")
-    public void resetStep(){
         Calendar calendar = Calendar.getInstance();
-        int hora = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuto = calendar.get(Calendar.MINUTE);
-        if (hora == 0 && minuto == 0){
-            previewCount = stepCount;
-            steptaken = 0;
-            saveData();
-            countTextView.setText("Passos: "+steptaken);
-            circleBar.setProgress(steptaken);
-        }
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 48);
+        calendar.set(Calendar.SECOND, 0);
+
+
+        long triggerTime = calendar.getTimeInMillis();
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+
+        // Agendar o alarme para a próxima meia-noite
+        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime,
+        //        AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
 
+    private void MidnightReset() {
+        Calendar midnight = Calendar.getInstance();
+        midnight.setTimeInMillis(System.currentTimeMillis());
+        midnight.set(Calendar.HOUR_OF_DAY, 14);
+        midnight.set(Calendar.MINUTE, 24);
+        midnight.set(Calendar.SECOND, 0);
+        midnight.set(Calendar.MILLISECOND, 0);
 
+
+        if (midnight.getTimeInMillis() <= System.currentTimeMillis()) {
+            midnight.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+
+        long timeUntilMidnight = midnight.getTimeInMillis() - System.currentTimeMillis();
+
+
+        midnightResetTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                resetStep();
+            }
+        }, timeUntilMidnight, 24 * 60 * 60 * 1000); // 24 horas em milissegundos
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void resetStep(){
+        previewCount = stepCount;
+        steptaken = 0;
+        saveData();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateStepCountView();
+            }
+        });
+    }
+    private void updateStepCountView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                countTextView.setText("Passos: " + steptaken);
+                circleBar.setProgress(steptaken);
+            }
+        });
+    }
     private void saveData(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();

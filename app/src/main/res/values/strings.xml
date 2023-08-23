@@ -36,4 +36,6 @@
     <string name="digite_sua_idade">digite sua idade</string>
     <string name="digite_seu_email_cadastro">digite seu email</string>
     <string name="digite_sua_senha_cadastro">digite sua senha</string>
+    <string name="apptext">APP</string>
+    <string name="formul_rio_de_cadastro">Formulário de Cadastro</string>
 </resources>
