@@ -140,26 +140,33 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        calendar.set(Calendar.MINUTE, 48);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 55);
+
 
 
         long triggerTime = calendar.getTimeInMillis();
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        }
 
-        // Agendar o alarme para a próxima meia-noite
-        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime,
-        //        AlarmManager.INTERVAL_DAY, pendingIntent);
+
+
 
     }
+
+
 
     private void MidnightReset() {
         Calendar midnight = Calendar.getInstance();
         midnight.setTimeInMillis(System.currentTimeMillis());
-        midnight.set(Calendar.HOUR_OF_DAY, 14);
-        midnight.set(Calendar.MINUTE, 24);
+        midnight.set(Calendar.HOUR_OF_DAY, 0);
+        midnight.set(Calendar.MINUTE, 0);
         midnight.set(Calendar.SECOND, 0);
         midnight.set(Calendar.MILLISECOND, 0);
 
@@ -178,6 +185,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
                 resetStep();
             }
         }, timeUntilMidnight, 24 * 60 * 60 * 1000); // 24 horas em milissegundos
+
     }
 
     @SuppressLint("SetTextI18n")
