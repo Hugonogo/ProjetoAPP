@@ -1,17 +1,20 @@
-*.iml
-.gradle
-/local.properties
+# Default ignored files
+/.cxx
+/.DS_Store
+/.gradle
+/.idea/assetWizardSettings.xml
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
-/.idea/workspace.xml
 /.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+/.idea/workspace.xml
 /build
 /captures
-.externalNativeBuild
-.cxx
+/externalNativeBuild
+/local.properties
+*.iml
 local.properties
+
+# Project specific ignored files
 projeto_ufpa
 produto_ufpa.pub
