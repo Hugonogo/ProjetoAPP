@@ -143,8 +143,8 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 24);
+        calendar.set(Calendar.HOUR_OF_DAY, 22);
+        calendar.set(Calendar.MINUTE, 31);
         calendar.set(Calendar.SECOND, 55);
 
 

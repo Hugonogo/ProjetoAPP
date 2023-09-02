@@ -25,8 +25,8 @@ public class AbrirAppMidNight extends BroadcastReceiver {
     public static void MidnightReset() {
         Calendar midnight = Calendar.getInstance();
         midnight.setTimeInMillis(System.currentTimeMillis());
-        midnight.set(Calendar.HOUR_OF_DAY, 21);
-        midnight.set(Calendar.MINUTE, 25);
+        midnight.set(Calendar.HOUR_OF_DAY, 22);
+        midnight.set(Calendar.MINUTE, 32);
         midnight.set(Calendar.SECOND, 0);
         midnight.set(Calendar.MILLISECOND, 0);
         Timer midnightResetTimer = new Timer();
