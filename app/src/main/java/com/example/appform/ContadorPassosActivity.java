@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appform.util.PassoUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -42,8 +43,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private TextView countTextView;
     private ProgressBar circleBar;
 
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private Timer midnightResetTimer = new Timer();
+
 
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -60,7 +60,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
-
+        // Inicializa a referência do Firebase se o usuário estiver logado
         if ( user != null){
             passosRef = FirebaseDatabase.getInstance()
                         .getReference("usuarios")
@@ -73,14 +73,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
+        // Verifica se o dispositivo possui o sensor de contador de passos
         possuiSensor();
         loadData();
-        scheduleAppOpen();
-        MidnightReset();
+        AlarmeDeAbrirApp();
+
 
     }
 
+    // Método chamado quando a atividade está pausada
     protected void onPause() {
         super.onPause();
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
@@ -88,7 +89,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
     }
-
+    // Método chamado quando a atividade é retomada
     @Override
     protected void onResume() {
         super.onResume();
@@ -97,20 +98,21 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
     }
-
+    //Método para contar os passos
     @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        //se o sensor utilizado for o "stepCounterSensor"
         if (sensorEvent.sensor == stepCounterSensor) {
             stepCount = (int) sensorEvent.values[0];
             steptaken = stepCount - previewCount;
 
             updateStepCountView();
             atualizarPassoFirebase(steptaken);
-            saveData();
+            PassoUtil.saveData(previewCount, this);
         }
     }
-
+    // Atualiza o valor do contador de passos no Firebase
     public void atualizarPassoFirebase(int passos){
             passosRef.setValue(passos);
     }
@@ -119,7 +121,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
-
+    // Verifica se o dispositivo possui o sensor StepCounter
     public void possuiSensor(){
 
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
@@ -132,16 +134,17 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
     }
-    public void scheduleAppOpen() {
-        Log.d("log", "scheduleAppOpen: funcionando!!!!");
+    // Agenda a abertura do aplicativo à meia-noite
+    public void AlarmeDeAbrirApp() {
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AbrirAppMidNight.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 24);
         calendar.set(Calendar.SECOND, 55);
 
 
@@ -153,6 +156,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
         if (alarmManager != null) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+            MidnightReset();
         }
 
 
@@ -161,14 +165,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     }
 
 
-
-    private void MidnightReset() {
+    //Reseta o contador de passos à Meia-Noite
+    public static void MidnightReset() {
         Calendar midnight = Calendar.getInstance();
         midnight.setTimeInMillis(System.currentTimeMillis());
-        midnight.set(Calendar.HOUR_OF_DAY, 0);
-        midnight.set(Calendar.MINUTE, 0);
+        midnight.set(Calendar.HOUR_OF_DAY, 21);
+        midnight.set(Calendar.MINUTE, 25);
         midnight.set(Calendar.SECOND, 0);
         midnight.set(Calendar.MILLISECOND, 0);
+        Timer midnightResetTimer = new Timer();
 
 
         if (midnight.getTimeInMillis() <= System.currentTimeMillis()) {
@@ -182,17 +187,17 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         midnightResetTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                resetStep();
+
             }
         }, timeUntilMidnight, 24 * 60 * 60 * 1000); // 24 horas em milissegundos
 
     }
-
+    //Método de reset de passos
     @SuppressLint("SetTextI18n")
     public void resetStep(){
         previewCount = stepCount;
         steptaken = 0;
-        saveData();
+        PassoUtil.saveData(previewCount, this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -200,6 +205,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             }
         });
     }
+
     private void updateStepCountView() {
         runOnUiThread(new Runnable() {
             @Override
@@ -209,13 +215,9 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             }
         });
     }
-    private void saveData(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("chave-passos", previewCount);
-        editor.apply();
+    //Salva a contagem de passos no sharedPreferences
 
-    }
+    //Recarrega os passos do SharedPreferences
     private void loadData(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         steptaken = preferences.getInt("chave-passos", 0);
