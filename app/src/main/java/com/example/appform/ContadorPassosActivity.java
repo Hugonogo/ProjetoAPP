@@ -42,8 +42,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private TextView countTextView;
     private ProgressBar circleBar;
 
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private Timer midnightResetTimer = new Timer();
+    Timer midnightResetTimer = new Timer();
 
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -60,7 +59,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
-
+        // Inicializa a referência do Firebase se o usuário estiver logado
         if ( user != null){
             passosRef = FirebaseDatabase.getInstance()
                         .getReference("usuarios")
@@ -73,14 +72,16 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
+        // Verifica se o dispositivo possui o sensor de contador de passos
         possuiSensor();
         loadData();
-        scheduleAppOpen();
+        AlarmeDeAbrirApp();
         MidnightReset();
+
 
     }
 
+    // Método chamado quando a atividade está pausada
     protected void onPause() {
         super.onPause();
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
@@ -88,7 +89,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
     }
-
+    // Método chamado quando a atividade é retomada
     @Override
     protected void onResume() {
         super.onResume();
@@ -97,20 +98,20 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         }
 
     }
-
+    //Método para contar os passos
     @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        //se o sensor utilizado for o "stepCounterSensor"
         if (sensorEvent.sensor == stepCounterSensor) {
             stepCount = (int) sensorEvent.values[0];
             steptaken = stepCount - previewCount;
 
             updateStepCountView();
             atualizarPassoFirebase(steptaken);
-            saveData();
         }
     }
-
+    // Atualiza o valor do contador de passos no Firebase
     public void atualizarPassoFirebase(int passos){
             passosRef.setValue(passos);
     }
@@ -119,7 +120,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
-
+    // Verifica se o dispositivo possui o sensor StepCounter
     public void possuiSensor(){
 
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
@@ -132,36 +133,43 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
     }
-    public void scheduleAppOpen() {
-        Log.d("log", "scheduleAppOpen: funcionando!!!!");
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AbrirAppMidNight.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+    // Agenda a abertura do aplicativo à meia-noite
+    public void AlarmeDeAbrirApp() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isAlarmSet = preferences.getBoolean("isAlarmSet", false);
+        if (!isAlarmSet){
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, AbrirAppMidNight.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        calendar.set(Calendar.MINUTE, 48);
-        calendar.set(Calendar.SECOND, 0);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 14);
+            calendar.set(Calendar.MINUTE, 42);
+            calendar.set(Calendar.SECOND, 55);
+            long triggerTime = calendar.getTimeInMillis();
 
+            if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+            }
+            if (alarmManager != null) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("isAlarmSet", true);
+                editor.apply();
+            }
+        }
 
-        long triggerTime = calendar.getTimeInMillis();
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
-
-        // Agendar o alarme para a próxima meia-noite
-        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerTime,
-        //        AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
-
-    private void MidnightReset() {
+    public void MidnightReset() {
         Calendar midnight = Calendar.getInstance();
         midnight.setTimeInMillis(System.currentTimeMillis());
         midnight.set(Calendar.HOUR_OF_DAY, 14);
-        midnight.set(Calendar.MINUTE, 24);
+        midnight.set(Calendar.MINUTE, 43);
         midnight.set(Calendar.SECOND, 0);
         midnight.set(Calendar.MILLISECOND, 0);
+
 
 
         if (midnight.getTimeInMillis() <= System.currentTimeMillis()) {
@@ -178,9 +186,9 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
                 resetStep();
             }
         }, timeUntilMidnight, 24 * 60 * 60 * 1000); // 24 horas em milissegundos
+
     }
 
-    @SuppressLint("SetTextI18n")
     public void resetStep(){
         previewCount = stepCount;
         steptaken = 0;
@@ -192,6 +200,8 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             }
         });
     }
+
+
     private void updateStepCountView() {
         runOnUiThread(new Runnable() {
             @Override
@@ -201,13 +211,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             }
         });
     }
-    private void saveData(){
+
+    private void saveData() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("chave-passos", previewCount);
         editor.apply();
-
     }
+
+    //Recarrega os passos do SharedPreferences
     private void loadData(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         steptaken = preferences.getInt("chave-passos", 0);
