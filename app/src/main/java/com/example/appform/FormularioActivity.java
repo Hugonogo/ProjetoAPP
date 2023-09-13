@@ -2,6 +2,8 @@ package com.example.appform;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +24,7 @@ public class FormularioActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private DatabaseReference usuariosRef = FirebaseDatabase.getInstance().getReference("usuarios");
     private ActivityFormularioBinding vb;
-    private String nome, senha,email, telefone;
+    private String nome, senha, confirmSenha, email, telefone;
     private String sexo;
     private int idade;
     private Double peso, altura;
@@ -38,20 +40,34 @@ public class FormularioActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         configurarAlert();
+        vb.checkSenha.setOnClickListener(v -> {
+            if (vb.checkSenha.isChecked()) {
+                vb.edtPass.setInputType(InputType.TYPE_CLASS_TEXT);
+                vb.edtConfirmPass.setInputType(InputType.TYPE_CLASS_TEXT);
+            } else {
+                vb.edtPass.setInputType(
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                );
+                vb.edtConfirmPass.setInputType(
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                );
+            }
+        });
 
-        vb.btnConcluir.setOnClickListener( viewProx -> {
+        vb.btnProx.setOnClickListener( viewProx -> {
 
             nome = vb.edtNome.getText().toString().trim();
             senha = vb.edtPass.getText().toString().trim();
+            confirmSenha = vb.edtConfirmPass.getText().toString().trim();
             email = vb.edtEmail.getText().toString().trim();
             telefone = vb.edtTel.getText().toString().trim();
-            sexo = vb.edtSexo.getText().toString();
-            String idade_texto = vb.edtIdade.getText().toString();
-            String peso_texto = vb.edtPeso.getText().toString().replace(",", ".");
-            String altura_texto = vb.edtAltura.getText().toString().replace(",", ".");
-            idade = Integer.parseInt( idade_texto );
-            peso = Double.parseDouble( peso_texto );
-            altura = Double.parseDouble( altura_texto );
+            //sexo = vb.edtSexo.getText().toString();
+            //String idade_texto = vb.edtIdade.getText().toString();
+            //String peso_texto = vb.edtPeso.getText().toString().replace(",", ".");
+            //String altura_texto = vb.edtAltura.getText().toString().replace(",", ".");
+            //idade = Integer.parseInt( idade_texto );
+            //peso = Double.parseDouble( peso_texto );
+            //altura = Double.parseDouble( altura_texto );
 
 
             if (
@@ -59,20 +75,21 @@ public class FormularioActivity extends AppCompatActivity {
                 && !senha.isEmpty()
                 && !email.isEmpty()
                 && !telefone.isEmpty()
-                && !sexo.isEmpty()
-                && !idade_texto.isEmpty()
-                && !peso_texto.isEmpty()
-                && !altura_texto.isEmpty()
+                && !confirmSenha.isEmpty()
+                && (senha.equals(confirmSenha))
+                //&& !idade_texto.isEmpty()
+                //&& !peso_texto.isEmpty()
+                //&& !altura_texto.isEmpty()
             ){
                 ModeloUsuario modeloUsuario = new ModeloUsuario();
 
                 modeloUsuario.setEmail(email);
                 modeloUsuario.setNome(nome);
                 modeloUsuario.setTelefone(telefone);
-                modeloUsuario.setAltura(altura);
-                modeloUsuario.setIdade(idade);
-                modeloUsuario.setPeso(peso);
-                modeloUsuario.setSexo(sexo);
+                //modeloUsuario.setAltura(altura);
+                //modeloUsuario.setIdade(idade);
+                //modeloUsuario.setPeso(peso);
+                //modeloUsuario.setSexo(sexo);
                 modeloUsuario.setPassos(0);
 
                 dialog_carregando.show();
@@ -88,7 +105,7 @@ public class FormularioActivity extends AppCompatActivity {
 
                                     if ( task1.isSuccessful() ){
                                         dialog_carregando.dismiss();
-                                        startActivity(new Intent(getApplicationContext(), ContadorPassosActivity.class));
+                                        startActivity(new Intent(getApplicationContext(), FormularioActivity2.class));
                                         Toast.makeText(FormularioActivity.this, "Cadastro completo!", Toast.LENGTH_SHORT).show();
                                     } else  {
                                         dialog_carregando.dismiss();
@@ -108,9 +125,13 @@ public class FormularioActivity extends AppCompatActivity {
                         }
                 );
             }else{
+                if (!senha.equals(confirmSenha)){
+                    Snackbar.make(viewProx, "A Senha não confirma", Snackbar.LENGTH_LONG).show();
+                }
+                else{
                 Snackbar.make(
                         viewProx, "Preencha todos os campos!", Snackbar.LENGTH_LONG
-                ).show();
+                ).show();}
             }
 
         });

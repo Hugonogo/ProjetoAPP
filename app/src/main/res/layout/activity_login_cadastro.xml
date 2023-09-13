@@ -11,13 +11,12 @@
 
     <LinearLayout
         android:layout_width="361dp"
-        android:layout_height="481dp"
+        android:layout_height="513dp"
         android:layout_gravity="center"
-        android:padding="5dp"
         android:background="@drawable/border_background"
         android:orientation="vertical"
-        tools:ignore="TextSizeCheck"
-        >
+        android:padding="10dp"
+        tools:ignore="TextSizeCheck">
 
         <TextView
             android:id="@+id/txt_login"
@@ -27,9 +26,9 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/loginMaiusculo"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="90px"
+            android:textStyle="bold"
 
             tools:ignore="PxUsage,TextContrastCheck" />
 
@@ -79,6 +78,14 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <CheckBox
+            android:id="@+id/check_senha"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/mostrar_senha"
+            tools:ignore="VisualLintButtonSize" />
+
         <EditText
             android:id="@+id/edt_digite_password"
             android:layout_width="match_parent"
@@ -118,7 +125,7 @@
             android:layout_marginLeft="75dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="75dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/border_button"
             android:insetTop="6dp"
             android:text="@string/cadastrar"

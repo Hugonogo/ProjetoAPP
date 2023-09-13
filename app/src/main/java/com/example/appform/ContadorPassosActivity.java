@@ -11,10 +11,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,17 +57,14 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
         // Inicializa a referência do Firebase se o usuário estiver logado
-        if ( user != null){
+
+
+        if (user != null) {
             passosRef = FirebaseDatabase.getInstance()
-                        .getReference("usuarios")
-                        .child(user.getUid())
-                        .child("passos");
-
-        }else{
-            Toast.makeText(context, "Faça login primeiro!", Toast.LENGTH_SHORT).show();
-            finish();
+                    .getReference("usuarios")
+                    .child(user.getUid())
+                    .child("passos");
         }
-
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         // Verifica se o dispositivo possui o sensor de contador de passos
         possuiSensor();
@@ -136,11 +130,11 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     // Agenda a abertura do aplicativo à meia-noite
     public void AlarmeDeAbrirApp() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isAlarmSet = preferences.getBoolean("isAlarmSet", false);
+        boolean isAlarmSet = preferences.getBoolean("Alarme", false);
         if (!isAlarmSet){
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, AbrirAppMidNight.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
@@ -155,7 +149,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             if (alarmManager != null) {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isAlarmSet", true);
+                editor.putBoolean("Alarme", true);
                 editor.apply();
             }
         }
@@ -193,22 +187,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         previewCount = stepCount;
         steptaken = 0;
         saveData();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                updateStepCountView();
-            }
-        });
+        runOnUiThread(this::updateStepCountView);
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void updateStepCountView() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                countTextView.setText("Passos: " + steptaken);
-                circleBar.setProgress(steptaken);
-            }
+        runOnUiThread(() -> {
+            countTextView.setText("Passos: " + steptaken);
+            circleBar.setProgress(steptaken);
         });
     }
 

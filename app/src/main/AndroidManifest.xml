@@ -32,7 +32,7 @@
             android:name=".ContadorPassosActivity"
             android:exported="false" />
         <activity
-            android:name=".Formulario2"
+            android:name=".FormularioActivity2"
             android:exported="false" />
         <activity
             android:name=".FormularioActivity"

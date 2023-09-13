@@ -7,7 +7,7 @@
     android:background="@drawable/background_gradient"
     android:gravity="center"
     android:orientation="vertical"
-    android:fillViewport="true"
+
     tools:context=".FormularioActivity">
     <LinearLayout
         android:layout_width="361dp"
@@ -20,24 +20,14 @@
         android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/text_title_app"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
-
-            android:text="@string/apptext"
-            android:textAlignment="center"
-            android:textSize="50sp" />
-
-        <TextView
             android:id="@+id/text_desc_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
+            android:layout_marginTop="15dp"
             android:text="@string/formul_rio_de_cadastro"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text_preencher_form"
@@ -114,13 +104,20 @@
             android:id="@+id/txt_cadastrar_senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/senha"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:text="@string/senha"
 
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/check_senha"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/mostrar_senha_cad"
+            tools:ignore="VisualLintButtonSize" />
 
         <EditText
             android:id="@+id/edt_pass"
@@ -134,13 +131,44 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/digite_sua_senha_cadastro"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="238dp" />
+
+        <TextView
+            android:id="@+id/txt_confirm_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/confirmar_senha"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:ignore="TextViewEdits" />
+
+        <EditText
+            android:id="@+id/edt_confirm_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/digite_sua_senha_cadastro"
+            android:inputType="textPassword"
             android:minHeight="48dp"
             android:textColorHint="#757575"
             tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
             tools:layout_editor_absoluteX="34dp"
-            tools:layout_editor_absoluteY="238dp" />
-
+            tools:layout_editor_absoluteY="238dp"
+            />
 
         <TextView
             android:id="@+id/txt_cadastar_tel"
@@ -172,136 +200,20 @@
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="372dp" />
 
-        <TextView
-            android:id="@+id/txt_cadastar_peso"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/peso"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/edt_peso"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-
-            android:layout_marginRight="25dp"
-            android:autofillHints=""
-            android:background="@drawable/border_text"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/digite_o_seu_peso"
-            android:inputType="number|numberDecimal"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-
-            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/txt_cadastrar_altura"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/altura"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/edt_altura"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-
-            android:layout_marginRight="25dp"
-            android:autofillHints=""
-            android:background="@drawable/border_text"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/selecione_sua_altura"
-            android:inputType="number|numberDecimal"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-
-            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sexo"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/edt_sexo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-
-            android:layout_marginRight="25dp"
-            android:autofillHints=""
-            android:background="@drawable/border_text"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/selecione_seu_sexo"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-
-            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/txt_cadastar_idade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/idade"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/edt_idade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-
-            android:layout_marginRight="25dp"
-            android:autofillHints=""
-            android:background="@drawable/border_text"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/digite_sua_idade"
-            android:inputType="number|numberSigned"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-
-            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_concluir"
+            android:id="@+id/btn_prox"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_marginLeft="75dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="75dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/border_button"
             android:text="@string/concluir"
             android:textColor="@color/color_prox_text"
             android:textSize="20sp"
             tools:ignore="VisualLintButtonSize,TextContrastCheck"
-            tools:text="Concluir Cadastro"
-            android:layout_marginBottom="15dp"/>
+            tools:text="Próximo" />
 
 
 

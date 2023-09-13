@@ -2,7 +2,10 @@ package com.example.appform;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -40,9 +43,26 @@ public class LoginOuCadastroActivity extends AppCompatActivity {
                     new Intent(getApplicationContext(), ContadorPassosActivity.class)
             );
         }else{
-            Toast.makeText(this, "Faça login ou se cadastre!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    this, "Faça login ou se cadastre!", Toast.LENGTH_SHORT
+            ).show();
         }
-        
+
+
+        vb.checkSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (vb.checkSenha.isChecked()) {
+                    vb.edtDigitePassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                } else {
+                    vb.edtDigitePassword.setInputType(
+                            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    );
+                }
+            }
+        });
+
+
         btnLogin.setOnClickListener(vLogin ->{
             dialog_carregando.show();
             String email, senha;

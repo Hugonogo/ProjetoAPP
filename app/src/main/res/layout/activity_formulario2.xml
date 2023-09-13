@@ -1,105 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient2"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".Formulario2">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="176dp"
-        android:layout_height="212dp"
-        app:srcCompat="@drawable/runicon"
-        android:contentDescription="@string/run" />
-
-    <EditText
-        android:id="@+id/edt_peso"
+    android:background="@drawable/background_gradient"
+    android:fillViewport="true"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:scrollbars="none"
+    android:isScrollContainer="false"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
+    android:scrollbarAlwaysDrawHorizontalTrack="false">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_background"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            tools:ignore="MissingConstraints,TextSizeCheck"
+            android:paddingTop="5dp">
 
-        android:layout_marginRight="25dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/peso"
-        android:inputType="number|numberDecimal"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
+            <TextView
+                android:id="@+id/text_preencher_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/preencha_o_formul_rio_com_suas_informa_es"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
-        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+            <TextView
+                android:id="@+id/txt_cadastar_peso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/peso"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/edt_altura"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="25dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/altura"
-        android:inputType="number|numberDecimal"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
+            <EditText
+                android:id="@+id/edt_peso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:background="@drawable/border_text"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/peso"
+                android:inputType="number|numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#757575"
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+            <TextView
+                android:id="@+id/txt_cadastar_altura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/altura"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/edt_sexo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="25dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/sexo"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
+            <EditText
+                android:id="@+id/edt_altura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:background="@drawable/border_text"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/altura"
+                android:inputType="number|numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#757575"
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+            <TextView
+                android:id="@+id/txt_cadastar_sexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/sexo"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/edt_idade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="25dp"
-        android:autofillHints=""
-        android:background="@drawable/border_text"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/idade"
-        android:inputType="number|numberSigned"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+                <RadioButton android:id="@+id/radio_femenino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Femenino"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_masculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Masculino"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
 
-        tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_concluir"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginRight="75dp"
-        android:background="@drawable/button_prox"
-        android:text="@string/concluir"
-        android:textColor="@color/color_prox_text"
+            <TextView
+                android:id="@+id/txt_cadastar_idade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/idade"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        android:textSize="20sp"
-        tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+            <EditText
+                android:id="@+id/edt_idade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:background="@drawable/border_text"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/idade"
+                android:inputType="number|numberSigned"
+                android:minHeight="48dp"
+                android:textColorHint="#757575"
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/txt_cadastrar_ativ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/pratica_atividade_f_sica"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioAtividadeSim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sim"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radioAtividadeNao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/n_o"
+                    />
+            </RadioGroup>
+
+            <!-- Campos adicionais que serão exibidos quando "Sim" for selecionado -->
+            <TextView
+                android:id="@+id/txt_cadastrar_tipo_ativ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/que_tipo_de_atividade_voc_pratica"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/tipoAtividade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_text"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:minHeight="48dp"
+                android:hint="@string/caminhada_corrida_academia_etc"
+                android:visibility="gone"
+                android:inputType="text"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/txt_cadastrar_freq_ativ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/com_que_frequ_ncia_voc_pratica_atividade_f_sica"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/frequenciaAtividade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_text"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:minHeight="48dp"
+                android:gravity="center"
+                android:hint="@string/quantas_vezes_por_semana"
+                android:visibility="gone"
+                android:autofillHints=""
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/txt_cadastrar_tempo_ativ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/qual_a_dura_o_em_minutos_das_atividades"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone"
+                 />
+
+            <EditText
+                android:id="@+id/edt_tempo_Ativ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_text"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:minHeight="48dp"
+                android:gravity="center"
+                android:hint="@string/tempo_em_minutos"
+                android:visibility="gone"
+                android:autofillHints=""
+                android:inputType="number|numberDecimal" />
+
+            <!-- Outros campos adicionais aqui -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_concluir"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_prox"
+                android:text="@string/concluir"
+                android:textColor="@color/color_prox_text"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck,TextSizeCheck,VisualLintButtonSize" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

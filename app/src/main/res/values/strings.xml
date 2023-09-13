@@ -38,4 +38,18 @@
     <string name="digite_sua_senha_cadastro">digite sua senha</string>
     <string name="apptext">APP</string>
     <string name="formul_rio_de_cadastro">Formulário de Cadastro</string>
+    <string name="confirmar_senha">Confirmar senha</string>
+    <string name="Femenino">Femenino</string>
+    <string name="Masculino">Masculino</string>
+    <string name="caminhada_corrida_academia_etc">Caminhada, Corrida, Academia etc...</string>
+    <string name="quantas_vezes_por_semana">Quantas vezes por semana?</string>
+    <string name="que_tipo_de_atividade_voc_pratica">Que tipo de atividade você pratica?</string>
+    <string name="com_que_frequ_ncia_voc_pratica_atividade_f_sica">Com que frequência você pratica atividade física?</string>
+    <string name="pratica_atividade_f_sica">Pratica Atividade Física?</string>
+    <string name="sim">Sim</string>
+    <string name="n_o">Não</string>
+    <string name="qual_a_dura_o_em_minutos_das_atividades">Qual a duração (em minutos) das atividades?</string>
+    <string name="tempo_em_minutos">Tempo em minutos</string>
+    <string name="mostrar_senha">Mostrar Senha</string>
+    <string name="mostrar_senha_cad">Mostrar senha</string>
 </resources>
