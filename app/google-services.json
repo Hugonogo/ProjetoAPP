@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "825259696167",
-    "project_id": "appform-5a0f2",
-    "storage_bucket": "appform-5a0f2.appspot.com"
+    "project_number": "328918105113",
+    "project_id": "balance-6b38a",
+    "storage_bucket": "balance-6b38a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:825259696167:android:e4ab85e9deb76e1b86ae02",
+        "mobilesdk_app_id": "1:328918105113:android:9abf16fd0a13f2a1573e88",
         "android_client_info": {
           "package_name": "com.example.appform"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "825259696167-e5cusmgm3cf19hll8mm62he7v2v9tfuc.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAdlLUN1rhxNRjdTQPh2XDEYdVrZxwa2XY"
+          "current_key": "AIzaSyAez2bIotC1sz4TsZD45GbT3aneaPmds2Q"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "825259696167-e5cusmgm3cf19hll8mm62he7v2v9tfuc.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328918105113:android:a8a576821aebc43d573e88",
+        "android_client_info": {
+          "package_name": "com.immortalweeds.pedometer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAez2bIotC1sz4TsZD45GbT3aneaPmds2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

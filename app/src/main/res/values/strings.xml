@@ -52,4 +52,6 @@
     <string name="tempo_em_minutos">Tempo em minutos</string>
     <string name="mostrar_senha">Mostrar Senha</string>
     <string name="mostrar_senha_cad">Mostrar senha</string>
+    <string name="cadastrar_passos">Cadastrar passos</string>
+    <string name="iniciar">Iniciar</string>
 </resources>

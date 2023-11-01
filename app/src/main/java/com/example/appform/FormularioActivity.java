@@ -3,7 +3,6 @@ package com.example.appform;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -21,13 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FormularioActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private DatabaseReference usuariosRef = FirebaseDatabase.getInstance().getReference("usuarios");
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final DatabaseReference usuariosRef = FirebaseDatabase.getInstance().getReference("usuarios");
     private ActivityFormularioBinding vb;
     private String nome, senha, confirmSenha, email, telefone;
-    private String sexo;
-    private int idade;
-    private Double peso, altura;
+    //private String sexo;
+    //private int idade;
+    //private Double peso, altura;
     private AlertDialog dialog_carregando;
 
 
@@ -38,7 +37,6 @@ public class FormularioActivity extends AppCompatActivity {
         setContentView(vb.getRoot());
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         configurarAlert();
         vb.checkSenha.setOnClickListener(v -> {
             if (vb.checkSenha.isChecked()) {
@@ -98,6 +96,7 @@ public class FormularioActivity extends AppCompatActivity {
                             if( task.isSuccessful() ){
 
                                 FirebaseUser user = task.getResult().getUser();
+                                assert user != null;
                                 String userUID = user.getUid();
 
                                 DatabaseReference novoUsuarioRef = usuariosRef.child(userUID);

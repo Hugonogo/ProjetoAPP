@@ -12,7 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="UselessParent">
-
+        <TextView
+            android:id="@+id/Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#1565C0"
+            android:textSize="30sp"
+            tools:ignore="VisualLintOverlap" />
         <ProgressBar
             android:id="@+id/progres_steps"
             style="?android:attr/progressBarStyleHorizontal"
@@ -32,6 +41,22 @@
             android:textColor="#1565C0"
             android:textSize="30sp"
             tools:ignore="VisualLintOverlap" />
+        <Button
+            android:id="@+id/cadastrarPassosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="290dp"
+            android:text="@string/cadastrar_passos"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/IniciarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="290dp"
+            android:text="@string/iniciar" />
+
     </RelativeLayout>
 
 
