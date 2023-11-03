@@ -46,6 +46,14 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
+    // Gerenciador de Permissões
+    private GerenciadorPermissao gerenciadorPermissao;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        gerenciadorPermissao.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n", "WrongViewCast"})
     @Override
@@ -65,10 +73,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
         dataView.setText(dataAtual+"");
+
+
+        // Inicia o Gerenciador de Permissões
+        gerenciadorPermissao = new GerenciadorPermissao(this);
+        // Verifica e solicita a permissão de "Atividade física"
+        gerenciadorPermissao.solicitarPermissao("android.permission.ACTIVITY_RECOGNITION");
+
+
         // Inicializa a referência do Firebase se o usuário estiver logado
-
-
-
         if (user != null) {
             passosRef = FirebaseDatabase.getInstance()
                     .getReference("usuarios")
