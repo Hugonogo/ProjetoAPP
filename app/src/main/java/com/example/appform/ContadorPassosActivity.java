@@ -3,12 +3,14 @@ package com.example.appform;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appform.database.PassosDBHelper;
+import com.example.appform.database.PassosDataSource;
 import com.example.appform.databinding.ActivityFormulario2Binding;
 import com.example.appform.databinding.ActivityStepCountBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +51,11 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
     private Button cadastrarPassosButton, IniciarButton;
 
+    private PassosDataSource dataSource;
 
+    private String dataAtual;
+
+    private Cursor cursor;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n", "WrongViewCast"})
     @Override
@@ -58,9 +66,10 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         // Formata a data para o formato desejado (por exemplo, "dd/MM/yyyy HH:mm:ss")
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataAtual = sdf.format(data.getTime());
+        dataAtual = sdf.format(data.getTime());
         setContentView(R.layout.activity_step_count);
         context = this;
+        dataSource = new PassosDataSource(this);
         dataView = findViewById(R.id.Data);
         circleBar = findViewById(R.id.progres_steps);
         loadIsCount();
@@ -112,6 +121,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     protected void onPause() {
         super.onPause();
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
+            dataSource.close();
             sensorManager.unregisterListener(this, stepCounterSensor);
         }
 
@@ -272,7 +282,27 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             @Override
             public void onClick(View v) {
                 // Chame o método para enviar os passos para o Firebase e resetar o contador
-                atualizarPassoFirebase(steptaken);
+                //atualizarPassoFirebase(steptaken);
+
+                dataSource.open();
+                dataSource.salvarPassosDiarios(dataAtual, steptaken);
+
+                Cursor cursor = dataSource.obterPassosDiarios();
+
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        do {
+                            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_ID));
+                            @SuppressLint("Range") String data = cursor.getString(cursor.getColumnIndex(PassosDBHelper.COLUMN_DATA));
+                            @SuppressLint("Range") int passos = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_PASSOS));
+
+                            Log.d("MeuApp", "ID: " + id + ", Data: " + data + ", Passos: " + passos);
+                        } while (cursor.moveToNext());
+                    }
+                    cursor.close();
+                } else {
+                    Log.d("MeuApp", "Nenhum dado encontrado no banco de dados.");
+                }
                 resetStep();
 
                 isCountingSteps = false;
