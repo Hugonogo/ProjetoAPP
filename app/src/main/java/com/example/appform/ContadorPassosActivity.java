@@ -325,6 +325,11 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
             }
         });
     }
+    @Override
+    protected void onDestroy() {
+        dataSource.close();
+        super.onDestroy();
+    }
 
 }
 
