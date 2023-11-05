@@ -45,6 +45,8 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    private Button cadastrarPassosButton, IniciarButton;
+
 
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n", "WrongViewCast"})
@@ -61,6 +63,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         context = this;
         dataView = findViewById(R.id.Data);
         circleBar = findViewById(R.id.progres_steps);
+        loadIsCount();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
@@ -80,34 +83,21 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
                     .child("passos");
         }
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // Verifica se o dispositivo possui o sensor de contador de passos
-        Button cadastrarPassosButton = findViewById(R.id.cadastrarPassosButton);
-        Button IniciarButton = findViewById(R.id.IniciarButton);
+        cadastrarPassosButton = findViewById(R.id.cadastrarPassosButton);
+        IniciarButton = findViewById(R.id.IniciarButton);
 
-        cadastrarPassosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Chame o método para enviar os passos para o Firebase e resetar o contador
-                atualizarPassoFirebase(steptaken);
-                resetStep();
+        if (isCountingSteps){
+            IniciarButton.setVisibility(View.GONE);
+            cadastrarPassosButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            cadastrarPassosButton.setVisibility(View.GONE);
+            IniciarButton.setVisibility(View.VISIBLE);
 
-                isCountingSteps = false;
-                cadastrarPassosButton.setVisibility(View.GONE);
-                IniciarButton.setVisibility(View.VISIBLE);
-
+        }
+        buttons();
 
 
-            }
-        });
-
-        IniciarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isCountingSteps = true;
-                IniciarButton.setVisibility(View.GONE);
-                cadastrarPassosButton.setVisibility(View.VISIBLE);
-            }
-        });
 
         possuiSensor();
         loadData();
@@ -265,5 +255,46 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
     }
+    private void saveIsCount() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("data", isCountingSteps);
+        editor.apply();
+    }
+
+    private void loadIsCount(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        isCountingSteps = preferences.getBoolean("data", false);
+
+    }
+    private void buttons(){
+        cadastrarPassosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chame o método para enviar os passos para o Firebase e resetar o contador
+                atualizarPassoFirebase(steptaken);
+                resetStep();
+
+                isCountingSteps = false;
+                saveIsCount();
+                cadastrarPassosButton.setVisibility(View.GONE);
+                IniciarButton.setVisibility(View.VISIBLE);
+
+
+
+            }
+        });
+
+        IniciarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isCountingSteps = true;
+                saveIsCount();
+                IniciarButton.setVisibility(View.GONE);
+                cadastrarPassosButton.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
 }
 
