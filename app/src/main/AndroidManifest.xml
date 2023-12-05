@@ -29,6 +29,9 @@
         </receiver>
 
         <activity
+            android:name=".BorgActivity"
+            android:exported="false" />
+        <activity
             android:name=".ContadorPassosActivity"
             android:exported="false" />
         <activity

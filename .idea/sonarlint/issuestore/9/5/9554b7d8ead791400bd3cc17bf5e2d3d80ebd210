@@ -1,0 +1,19 @@
+
+q	java:S116 "\Rename this field "dialog_carregando" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éå‹§
+]
+java:S1659"BDeclare "senha" and all following declarations on a separate line.(¤§µÞþÿÿÿÿ
+l
+java:S1450"QRemove the "vb" field and declare it as a local variable in the relevant methods.( Çàòýÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(Ï”•‚ûÿÿÿÿ
+m
+java:S3776$"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ž¨Œþÿÿÿÿ
+Q	java:S125@"<This block of commented-out lines of code should be removed.(áôì¦
+V	java:S125Y"<This block of commented-out lines of code should be removed.(ÃÃ²Ÿüÿÿÿÿ
+ƒ
+java:S3252‚"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(ØŸÎáûÿÿÿÿ
+ƒ
+java:S3252†"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(‚„Åûýÿÿÿÿ
+P
+java:S1128".Remove this unused import 'android.view.View'.(Ø½­äþÿÿÿÿ8†ÐìßÃ1
+T
+java:S1128"2Remove this unused import 'android.widget.Button'.(²òžýÿÿÿÿ8î“ëßÃ1

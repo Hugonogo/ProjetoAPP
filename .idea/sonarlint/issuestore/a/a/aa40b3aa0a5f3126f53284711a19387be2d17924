@@ -1,0 +1,37 @@
+
+d
+java:S11923"IDefine a constant instead of duplicating this literal "usuarios" 9 times.(Ä°Ùˆûÿÿÿÿ
+g	java:S117‡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØÍıõ
+l	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñ¸úÿÿÿÿ
+l	java:S117‰"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç™ĞÉıÿÿÿÿ
+f
+java:S1301n"KReplace this "switch" statement by "if" statements to increase readability.(ÿ«¬‹üÿÿÿÿ
+b
+java:S1301Û"KReplace this "switch" statement by "if" statements to increase readability.(ºÖ
+I
+java:S1199˜"-Extract this nested code block into a method.(ÒÌâ–øÿÿÿÿ
+q	java:S1161"\Rename this field "dialog_carregando" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éå‹§
+_
+java:S1659'"DDeclare "sexoRef" and all following declarations on a separate line.(µ÷èØşÿÿÿÿ
+<
+java:S1659-"&Declare "tipoAtiv" on a separate line.(…í©½
+\
+java:S1659."FDeclare "quantAtiv" and all following declarations on a separate line.(”å×ì
+:
+java:S1659/"$Declare "altura" on a separate line.( ñçœ
+R	java:S107Ä"<Method has 8 parameters, which is greater than 7 authorized.(áÆç«
+m
+java:S37765"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¨Œşÿÿÿÿ
+<	java:S131n""Add a default case to this switch.(ÿ«¬‹üÿÿÿÿ
+E
+java:S1940“")Use the opposite operator ("!=") instead.(İ’¤†üÿÿÿÿ
+E
+java:S1940“")Use the opposite operator ("!=") instead.(İ’¤†üÿÿÿÿ
+ƒ
+java:S3252®"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(‡şéÂûÿÿÿÿ
+~
+java:S3252¾"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(È—·Ë
+a	java:S128Ü"LEnd this switch case with an unconditional break, return or throw statement.(ÍúU
+8	java:S131Û""Add a default case to this switch.(ºÖ
+J
+java:S10683"/Remove this unused "usuariosRef" private field.(Ä°Ùˆûÿÿÿÿ

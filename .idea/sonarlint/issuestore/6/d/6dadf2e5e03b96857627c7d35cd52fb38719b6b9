@@ -1,0 +1,14 @@
+
+C
+java:S16044"(Make this anonymous inner class a lambda(‹­Ğœøÿÿÿÿ
+q	java:S116"\Rename this field "dialog_carregando" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éå‹§
+k
+java:S1450"URemove the "btnCad" field and declare it as a local variable in the relevant methods.(Ü¶ôó
+m
+java:S1450"WRemove the "btnLogin" field and declare it as a local variable in the relevant methods.(ææ™Æ
+U
+java:S1161":Add the "@Override" annotation above this method signature(¨Œşÿÿÿÿ
+9
+java:S1659D"#Declare "senha" on a separate line.(¬Âó—
+B
+java:S1602]",Remove useless curly braces around statement(À–şÇ

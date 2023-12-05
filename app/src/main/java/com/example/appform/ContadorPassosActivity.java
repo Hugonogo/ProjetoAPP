@@ -2,6 +2,7 @@ package com.example.appform;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.hardware.Sensor;
@@ -113,8 +114,15 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         //AlarmeDeAbrirApp();
         //MidnightReset();
 
+        Button BorgButton = findViewById(R.id.BorgButton);
 
+        BorgButton.setOnClickListener(view -> {
+            // Crie uma Intent para abrir a AtividadeB
+            Intent intent = new Intent(ContadorPassosActivity.this, BorgActivity.class);
 
+            // Inicie a nova atividade
+            startActivity(intent);
+        });
     }
 
     // Método chamado quando a atividade está pausada
@@ -330,6 +338,4 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         dataSource.close();
         super.onDestroy();
     }
-
 }
-
