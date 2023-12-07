@@ -1,27 +1,41 @@
 
-R
-java:S1066"/Merge this if statement with the enclosing one.(¢¢Åœùÿÿÿÿ8ğş¾“¹1
-m	java:S117b"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õçòñ8ğş¾“¹1
-J
-java:S1604d"(Make this anonymous inner class a lambda(İ‹†Ãşÿÿÿÿ8ñş¾“¹1
-E
-java:S1604t"(Make this anonymous inner class a lambda(áú¥ 8ñş¾“¹1
-Ÿ
-java:S1186¬"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§Ûëè8‚ÿ¾“¹1
-t
-java:S1450*"WRemove the "dataView" field and declare it as a local variable in the relevant methods.(„–§8†™“¹1
-l
-java:S18744"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Û›ë´øÿÿÿÿ8Š‰”¹1
-X	java:S125"<This block of commented-out lines of code should be removed.(°Áî8ÿ¾“¹1
-W
-java:S1161‡":Add the "@Override" annotation above this method signature(¹§ 8ÿ¾“¹1
-Y	java:S125¾"<This block of commented-out lines of code should be removed.(å¹’8“ÿ¾“¹1
-Y	java:S125İ"<This block of commented-out lines of code should be removed.(˜é¸²8“ÿ¾“¹1
-W
-java:S1874‹"9Remove this use of "PreferenceManager"; it is deprecated.(ä—´Ô8–ÿ¾“¹1
-a
-java:S1874‹"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(ä—´Ô8–ÿ¾“¹1
-W
-java:S1874“"9Remove this use of "PreferenceManager"; it is deprecated.(Äâá…8—ÿ¾“¹1
-a
-java:S1874“"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(Äâá…8—ÿ¾“¹1
+K
+java:S1066˜"/Merge this if statement with the enclosing one.(¢¢Åœùÿÿÿÿ
+m	java:S117u"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ‚¼Ù8âí›àÃ1
+K
+java:S1604¡"(Make this anonymous inner class a lambda(İ‹†Ãşÿÿÿÿ8ş£‰àÃ1
+F
+java:S1604Æ"(Make this anonymous inner class a lambda(áú¥ 8ı¾šàÃ1
+m	java:S1165"XRename this field "IniciarButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸¶¶ç
+˜
+java:S1186§"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§Ûëè
+A
+java:S16595"+Declare "IniciarButton" on a separate line.(¸¶¶ç
+m
+java:S1450/"WRemove the "dataView" field and declare it as a local variable in the relevant methods.(„–§
+Q	java:S125r"<This block of commented-out lines of code should be removed.(°Áî
+P
+java:S1161":Add the "@Override" annotation above this method signature(¹§ 
+R	java:S125¹"<This block of commented-out lines of code should be removed.(å¹’
+R	java:S125Ø"<This block of commented-out lines of code should be removed.(˜é¸²
+P
+java:S1874†"9Remove this use of "PreferenceManager"; it is deprecated.(ä—´Ô
+Z
+java:S1874†"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(ä—´Ô
+P
+java:S1874"9Remove this use of "PreferenceManager"; it is deprecated.(Äâá…
+Z
+java:S1874"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(Äâá…
+P
+java:S1874•"9Remove this use of "PreferenceManager"; it is deprecated.(ä—´Ô
+Z
+java:S1874•"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(ä—´Ô
+P
+java:S1874œ"9Remove this use of "PreferenceManager"; it is deprecated.(Äâá…
+Z
+java:S1874œ"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(Äâá…
+R	java:S125¥"<This block of commented-out lines of code should be removed.(‰íœ€
+V
+java:S1117ª":Rename "cursor" which hides the field declared at line 59.(¥Ñ«—ûÿÿÿÿ
+@
+java:S1068;"*Remove this unused "cursor" private field.(‘Ã··

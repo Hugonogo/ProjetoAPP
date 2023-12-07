@@ -39,7 +39,7 @@
     <string name="apptext">APP</string>
     <string name="formul_rio_de_cadastro">Formulário de Cadastro</string>
     <string name="confirmar_senha">Confirmar senha</string>
-    <string name="Femenino">Femenino</string>
+    <string name="Femenino">Feminino</string>
     <string name="Masculino">Masculino</string>
     <string name="caminhada_corrida_academia_etc">Caminhada, Corrida, Academia etc...</string>
     <string name="quantas_vezes_por_semana">Quantas vezes por semana?</string>
@@ -54,4 +54,12 @@
     <string name="mostrar_senha_cad">Mostrar senha</string>
     <string name="cadastrar_passos">Cadastrar passos</string>
     <string name="iniciar">Iniciar</string>
+
+    <string name="cadastrar_atividade">Cadastrar atividade</string>
+    <string name="preencher_atividade">Preencha a atividade a ser praticada</string>
+    <string name="nome_atividade">Escolha a atividade</string>
+    <string name="tempo_atividade">Digite a duração da atividade</string>
+    <string name="preencher_tempo">(em minutos)</string>
+    <string name="Intensidade">Intensidade</string>
+    <string name="salvar_atividade">Salvar</string>
 </resources>

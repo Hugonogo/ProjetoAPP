@@ -56,6 +56,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="290dp"
             android:text="@string/iniciar" />
+        <Button
+            android:id="@+id/BorgButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/IniciarButton"
+            android:layout_centerHorizontal="true"
+            android:text="@string/cadastrar_atividade" />
 
     </RelativeLayout>
 

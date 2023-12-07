@@ -2,13 +2,16 @@ package com.example.appform;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appform.database.PassosDBHelper;
+import com.example.appform.database.PassosDataSource;
 import com.example.appform.databinding.ActivityFormulario2Binding;
 import com.example.appform.databinding.ActivityStepCountBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,15 +50,13 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    private Button cadastrarPassosButton, IniciarButton;
 
-    // Gerenciador de Permissões
-    private GerenciadorPermissao gerenciadorPermissao;
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        gerenciadorPermissao.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    private PassosDataSource dataSource;
 
+    private String dataAtual;
+
+    private Cursor cursor;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n", "WrongViewCast"})
     @Override
@@ -64,24 +67,21 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         // Formata a data para o formato desejado (por exemplo, "dd/MM/yyyy HH:mm:ss")
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataAtual = sdf.format(data.getTime());
+        dataAtual = sdf.format(data.getTime());
         setContentView(R.layout.activity_step_count);
         context = this;
+        dataSource = new PassosDataSource(this);
         dataView = findViewById(R.id.Data);
         circleBar = findViewById(R.id.progres_steps);
+        loadIsCount();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         countTextView = findViewById(R.id.Count_TextView);
         updateStepCountView();
         dataView.setText(dataAtual+"");
-
-
-        // Inicia o Gerenciador de Permissões
-        gerenciadorPermissao = new GerenciadorPermissao(this);
-        // Verifica e solicita a permissão de "Atividade física"
-        gerenciadorPermissao.solicitarPermissao("android.permission.ACTIVITY_RECOGNITION");
-
-
         // Inicializa a referência do Firebase se o usuário estiver logado
+
+
+
         if (user != null) {
             passosRef = FirebaseDatabase.getInstance()
                     .getReference("usuarios")
@@ -93,48 +93,43 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
                     .child("passos");
         }
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // Verifica se o dispositivo possui o sensor de contador de passos
-        Button cadastrarPassosButton = findViewById(R.id.cadastrarPassosButton);
-        Button IniciarButton = findViewById(R.id.IniciarButton);
+        cadastrarPassosButton = findViewById(R.id.cadastrarPassosButton);
+        IniciarButton = findViewById(R.id.IniciarButton);
 
-        cadastrarPassosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Chame o método para enviar os passos para o Firebase e resetar o contador
-                atualizarPassoFirebase(steptaken);
-                resetStep();
+        if (isCountingSteps){
+            IniciarButton.setVisibility(View.GONE);
+            cadastrarPassosButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            cadastrarPassosButton.setVisibility(View.GONE);
+            IniciarButton.setVisibility(View.VISIBLE);
 
-                isCountingSteps = false;
-                cadastrarPassosButton.setVisibility(View.GONE);
-                IniciarButton.setVisibility(View.VISIBLE);
-
+        }
+        buttons();
 
 
-            }
-        });
-
-        IniciarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isCountingSteps = true;
-                IniciarButton.setVisibility(View.GONE);
-                cadastrarPassosButton.setVisibility(View.VISIBLE);
-            }
-        });
 
         possuiSensor();
         loadData();
         //AlarmeDeAbrirApp();
         //MidnightReset();
 
+        Button BorgButton = findViewById(R.id.BorgButton);
 
+        BorgButton.setOnClickListener(view -> {
+            // Crie uma Intent para abrir a AtividadeB
+            Intent intent = new Intent(ContadorPassosActivity.this, BorgActivity.class);
 
+            // Inicie a nova atividade
+            startActivity(intent);
+        });
     }
 
     // Método chamado quando a atividade está pausada
     protected void onPause() {
         super.onPause();
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
+            dataSource.close();
             sensorManager.unregisterListener(this, stepCounterSensor);
         }
 
@@ -278,5 +273,69 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
 
     }
-}
+    private void saveIsCount() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("data", isCountingSteps);
+        editor.apply();
+    }
 
+    private void loadIsCount(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        isCountingSteps = preferences.getBoolean("data", false);
+
+    }
+    private void buttons(){
+        cadastrarPassosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chame o método para enviar os passos para o Firebase e resetar o contador
+                //atualizarPassoFirebase(steptaken);
+
+                dataSource.open();
+                dataSource.salvarPassosDiarios(dataAtual, steptaken);
+
+                Cursor cursor = dataSource.obterPassosDiarios();
+
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        do {
+                            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_ID));
+                            @SuppressLint("Range") String data = cursor.getString(cursor.getColumnIndex(PassosDBHelper.COLUMN_DATA));
+                            @SuppressLint("Range") int passos = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_PASSOS));
+
+                            Log.d("MeuApp", "ID: " + id + ", Data: " + data + ", Passos: " + passos);
+                        } while (cursor.moveToNext());
+                    }
+                    cursor.close();
+                } else {
+                    Log.d("MeuApp", "Nenhum dado encontrado no banco de dados.");
+                }
+                resetStep();
+
+                isCountingSteps = false;
+                saveIsCount();
+                cadastrarPassosButton.setVisibility(View.GONE);
+                IniciarButton.setVisibility(View.VISIBLE);
+
+
+
+            }
+        });
+
+        IniciarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isCountingSteps = true;
+                saveIsCount();
+                IniciarButton.setVisibility(View.GONE);
+                cadastrarPassosButton.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    @Override
+    protected void onDestroy() {
+        dataSource.close();
+        super.onDestroy();
+    }
+}
