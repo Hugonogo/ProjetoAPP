@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string-array name="atividades_array">
         <item>Academia</item>
+        <item>Artes Marciais</item>
         <item>Caminhada</item>
+        <item>Calistenia</item>
+        <item>Ciclismo</item>
         <item>Corrida</item>
+        <item>Crossfit</item>
+        <item>Dança</item>
         <item>Futebol</item>
         <item>Natação</item>
-        <item>Voleibol</item>
+        <item>Pilates</item>
+        <item>Remo</item>
+        <item>Vôlei</item>
+        <item>Yoga</item>
+
     </string-array>
 
     <string-array name="intensidade_array">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
+        <item>(0) Nenhum</item>
+        <item>(1) Muito Leve</item>
+        <item>(2) Leve</item>
+        <item>(3) Moderado</item>
+        <item>(4) Pouco Intenso</item>
+        <item>(5~6) Intenso</item>
+        <item>(7~8) Muito Intenso</item>
+        <item>(9) Extremamente Intenso</item>
+        <item>(10) Máximo</item>
     </string-array>
 </resources>

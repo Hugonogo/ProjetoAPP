@@ -60,6 +60,6 @@
     <string name="nome_atividade">Escolha a atividade</string>
     <string name="tempo_atividade">Digite a duração da atividade</string>
     <string name="preencher_tempo">(em minutos)</string>
-    <string name="Intensidade">Intensidade</string>
+    <string name="esforco_atividade"> Classifique o nível de esforço da atividade (observe sua respiração) </string>
     <string name="salvar_atividade">Salvar</string>
 </resources>
