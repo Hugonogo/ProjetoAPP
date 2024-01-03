@@ -41,6 +41,16 @@
             android:textColor="#1565C0"
             android:textSize="30sp"
             tools:ignore="VisualLintOverlap" />
+
+
+        <Button
+            android:id="@+id/IniciarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="290dp"
+            android:text="@string/iniciar"
+            />
         <Button
             android:id="@+id/cadastrarPassosButton"
             android:layout_width="wrap_content"
@@ -48,21 +58,23 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="290dp"
             android:text="@string/cadastrar_passos"
-            android:visibility="gone"/>
-        <Button
-            android:id="@+id/IniciarButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="290dp"
-            android:text="@string/iniciar" />
+            android:visibility="invisible" />
+
         <Button
             android:id="@+id/BorgButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/IniciarButton"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="350dp"
             android:text="@string/cadastrar_atividade" />
+
+        <Button
+            android:id="@+id/acelerometroButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="400dp"
+            android:text="@string/acelerometro" />
 
     </RelativeLayout>
 

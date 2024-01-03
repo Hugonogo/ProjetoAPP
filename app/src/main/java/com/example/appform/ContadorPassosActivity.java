@@ -50,7 +50,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
     private DatabaseReference passosRef;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    private Button cadastrarPassosButton, IniciarButton;
+    private Button cadastrarPassosButton, IniciarButton, acelerometroButton, BorgButton;
 
     private PassosDataSource dataSource;
 
@@ -114,7 +114,7 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
         //AlarmeDeAbrirApp();
         //MidnightReset();
 
-        Button BorgButton = findViewById(R.id.BorgButton);
+        BorgButton = findViewById(R.id.BorgButton);
 
         BorgButton.setOnClickListener(view -> {
             // Crie uma Intent para abrir a AtividadeB
@@ -122,6 +122,11 @@ public class ContadorPassosActivity extends AppCompatActivity implements SensorE
 
             // Inicie a nova atividade
             startActivity(intent);
+        });
+
+        acelerometroButton = findViewById(R.id.acelerometroButton);
+        acelerometroButton.setOnClickListener(v ->{
+            startActivity(new Intent(getApplicationContext(), AcelerometroActivity.class));
         });
     }
 

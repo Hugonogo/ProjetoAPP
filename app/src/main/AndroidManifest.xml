@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <meta-data tools:replace="android:value" android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.SENSOR_ACCELEROMETER"/>
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SENSOR_ACCELEROMETER" />
@@ -31,6 +33,9 @@
         <activity
             android:name=".BorgActivity"
             android:exported="false" />
+        <activity
+            android:name=".AcelerometroActivity"
+            android:exported="false"/>
         <activity
             android:name=".ContadorPassosActivity"
             android:exported="false" />

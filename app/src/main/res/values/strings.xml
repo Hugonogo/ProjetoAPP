@@ -62,4 +62,6 @@
     <string name="preencher_tempo">(em minutos)</string>
     <string name="Intensidade">Intensidade</string>
     <string name="salvar_atividade">Salvar</string>
+    <string name="x_0_00_ny_0_00_nz_0_00">X: 0.00\nY: 0.00\nZ: 0.00</string>
+    <string name="acelerometro">Acelerometro</string>
 </resources>
