@@ -1,5 +1,7 @@
 package com.example.appform;
 import android.annotation.SuppressLint;
+import android.app.Service;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
@@ -8,15 +10,26 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appform.database.ActivityDataModel;
+import com.example.appform.database.ActivityDatabase;
 import com.example.appform.database.CountsDatabase;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class AcelerometroActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
@@ -32,6 +45,10 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     double meX, meY, meZ;
     private CountsDatabase databaseHelper;
     private Handler handler;
+    private long primeiraContagem;
+    private long ultimaContagem;
+    private ActivityDatabase activityDatabase;
+    private Spinner SpinerAtividade;
     private final int INTERVALO_SALVAR_DADOS = 5000; // 5 segundos em milissegundos
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,12 +56,28 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acelerometro);
 
+        SpinerAtividade = findViewById(R.id.spinner_atividade);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.atividades_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SpinerAtividade.setAdapter(adapter);
 
+        SpinerAtividade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // O código aqui será executado quando uma opção for selecionada
+                String opcaoSelecionada = parentView.getItemAtPosition(position).toString();
+                Toast.makeText(AcelerometroActivity.this, "Opção selecionada: " + opcaoSelecionada, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Este método é chamado quando nada está selecionado
+            }
+        });
         startStopButton = findViewById(R.id.startStopButton);
         startStopButton.setOnClickListener(v -> toggleAcelerometro());
-        accelerationValues = findViewById(R.id.accelerationValues);
-        activityLevel = findViewById(R.id.nivelAtividade);
 
+        activityDatabase = new ActivityDatabase(this);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         databaseHelper = new CountsDatabase(this);
         handler = new Handler();
@@ -74,14 +107,6 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
             magnitude = Math.sqrt(meX * meX + meY * meY + meZ * meZ);
 
 
-
-
-            eixoValues = String.format("X: %.2f\nY: %.2f\nZ: %.2f", xAxis, yAxis, zAxis);
-            accelerationValues.setText(eixoValues);
-
-            atiValue = String.format("Magnitude: %.2f\nNível de Atividade: %s", magnitude, niveis);
-            activityLevel.setText(atiValue);
-
         }
     }
 
@@ -101,6 +126,8 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     // Método para iniciar o acelerômetro
     private void startAcelerometro() {
         isAcelerometroAtivo = true;
+        zerarTabela();
+        primeiraContagem = System.currentTimeMillis();
         handler.postDelayed(salvarDadosRunnable, INTERVALO_SALVAR_DADOS);
         // Registrar o sensor para começar a receber atualizações
         if (sensorManager != null) {
@@ -116,17 +143,21 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     }
 
     // Método para pausar o acelerômetro
+    @SuppressLint("DefaultLocale")
     private void pauseAcelerometro() {
         isAcelerometroAtivo = false;
         handler.removeCallbacks(salvarDadosRunnable);
+        ultimaContagem = System.currentTimeMillis();  // Obter o tempo de término
         // Parar de receber atualizações do sensor
         if (sensorManager != null) {
             sensorManager.unregisterListener(this);
             selectAll();
             calcularMedia();
             mensurarNivel();
-            atiValue = String.format("Magnitude: %.2f\nNível de Atividade: %s", magnitude, niveis);
-            activityLevel.setText(atiValue);
+            calcularTempoTotal();
+            salvarAtividade();
+            mostrarTabelaNoLog();
+
         }
 
         // Atualizar texto do botão para indicar a ação de iniciar
@@ -195,5 +226,52 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
             cursor.close();
         }
         db.close();
+    }
+    private void zerarTabela() {
+        CountsDatabase databaseHelper = new CountsDatabase(this);
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        // Excluir todos os registros da tabela
+        db.delete(CountsDatabase.TABLE_NAME, null, null);
+
+        db.close();
+    }
+
+    private void calcularTempoTotal() {
+        long tempoTotalMillis = ultimaContagem - primeiraContagem;
+        long tempoTotalMinutos = tempoTotalMillis / (60 * 1000);  // Converter para minutos
+
+        // Agora, 'tempoTotalMinutos' contém a diferença de tempo em minutos
+        Log.d("AcelerometroTime", "Tempo Total em Minutos: " + tempoTotalMinutos);
+    }
+
+    private void salvarAtividade() {
+        // Obter o tipo de atividade do Spinner
+        String activityType = SpinerAtividade.getSelectedItem().toString();
+
+        // Calcular a diferença de tempo em minutos
+        long tempoTotalMillis = ultimaContagem - primeiraContagem;
+        long tempoTotalMinutos = tempoTotalMillis / (60 * 1000);
+
+        // Obter o nível de atividade
+        String nivelAtividade = niveis;
+
+        // Salvar no banco de dados
+        activityDatabase.insertActivityData(activityType, (int) tempoTotalMinutos, nivelAtividade);
+    }
+
+    private void mostrarTabelaNoLog() {
+        Log.d("AcelerometroActivity", "Exibindo Tabela de Atividades:");
+
+        // Recuperar todos os registros da tabela
+        List<HashMap<String, String>> activityDataList = activityDatabase.getAllActivityData();
+
+        // Iterar sobre os registros e exibir no Log
+        for (HashMap<String, String> activityData : activityDataList) {
+            Log.d("AcelerometroActivity", "ID: " + activityData.get("id") +
+                    ", Tipo: " + activityData.get("activityType") +
+                    ", Tempo (min): " + activityData.get("activityTimeMinutes") +
+                    ", Nível: " + activityData.get("activityLevel"));
+        }
     }
 }

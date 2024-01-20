@@ -3,36 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AcelerometroActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/background_gradient"
+    android:gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="361dp"
+        android:layout_height="481dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border_background"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        tools:ignore="TextSizeCheck"
+        android:paddingTop="5dp">
+        <TextView
+            android:id="@+id/text_desc_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/atividade"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+        <TextView
+            android:id="@+id/text_preencher_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/preencher_atividade"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/txt_preencher_atividade2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/nome_atividade"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/startStopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@android:color/holo_green_dark"
-        android:onClick="startStopAcelerometro"
-        android:text="Iniciar"
-        android:textColor="@color/color_prox_text"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/accelerationValues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/x_0_00_ny_0_00_nz_0_00"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/nivelAtividade"
-        android:layout_width="203dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="" />
-
+        <Spinner
+            android:id="@+id/spinner_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:minHeight="48dp"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="168dp" />
+        <Button
+            android:id="@+id/startStopButton"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginBottom="15dp"
+            android:onClick="startStopAcelerometro"
+            android:text="@string/iniciar"
+            android:textColor="@color/color_prox_text"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </LinearLayout>
