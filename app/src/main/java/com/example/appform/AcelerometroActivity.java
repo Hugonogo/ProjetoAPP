@@ -50,16 +50,18 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     private ActivityDatabase activityDatabase;
     private Spinner SpinerAtividade;
     private final int INTERVALO_SALVAR_DADOS = 5000; // 5 segundos em milissegundos
+    private AcelerometroService acelerometroService;
     @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acelerometro);
-
         SpinerAtividade = findViewById(R.id.spinner_atividade);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.atividades_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SpinerAtividade.setAdapter(adapter);
+        //float xAxis1 = acelerometroService.xAxis;
+
 
         SpinerAtividade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -81,6 +83,12 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         databaseHelper = new CountsDatabase(this);
         handler = new Handler();
+
+        // Se o serviço ainda não estiver em execução, inicie-o
+        if (acelerometroService == null) {
+            Intent serviceIntent = new Intent(this, AcelerometroService.class);
+            startService(serviceIntent);
+        }
     }
     private Runnable salvarDadosRunnable = new Runnable() {
         @Override
@@ -100,11 +108,11 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float[] values = event.values;
             // Aqui, os counts podem ser acessados em values[0], values[1], values[2]
-             xAxis = values[0];
-             yAxis = values[1];
-             zAxis = values[2];
+            xAxis = values[0];
+            yAxis = values[1];
+            zAxis = values[2];
 
-            magnitude = Math.sqrt(meX * meX + meY * meY + meZ * meZ);
+
 
 
         }
@@ -173,6 +181,8 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
 
     }
     public void mensurarNivel(){
+        magnitude = Math.sqrt(meX * meX + meY * meY + meZ * meZ);
+        Log.d("Mag", "Magnitude: " + magnitude);
         if (magnitude < nivelSedenario) {
             niveis = "Sedentário";
         } else if (magnitude < nivelModerado) {
