@@ -1,8 +1,10 @@
 package com.example.appform;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,86 +16,84 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.appform.databinding.ActivityLoginCadastroBinding;
 import com.example.appform.databinding.CarregandoLayoutBinding;
+import com.example.appform.model.ModelResponse;
+import com.example.appform.model.ModeloUsuario;
+import com.example.appform.model.ModeloUsuarioKarine;
+import com.example.appform.retrofitUtils.RetrofitUtil;
+import com.example.appform.retrofitUtils.ServiceApi;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginOuCadastroActivity extends AppCompatActivity {
 
     private AlertDialog dialog_carregando;
-    private Button btnCad;
-
-    private Button btnLogin;
-    
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
     private ActivityLoginCadastroBinding vb ;
+
+    private Retrofit retrofit;
+    private ServiceApi service;
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         vb = ActivityLoginCadastroBinding.inflate(getLayoutInflater());
         setContentView(vb.getRoot());
-        btnCad = findViewById(R.id.btn_cad);
-        btnLogin = findViewById(R.id.login_btn);
+
+        preferences  = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        editor = preferences.edit();
+
         configurarAlert();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        // verifica se o user já ta logado
-        if ( user != null){
-            Toast.makeText(this, "Bem-vindo de volta!", Toast.LENGTH_SHORT).show();
-            startActivity(
-                    new Intent(getApplicationContext(), ContadorPassosActivity.class)
-            );
-        }else{
-            Toast.makeText(
-                    this, "Faça login ou se cadastre!", Toast.LENGTH_SHORT
-            ).show();
-        }
 
+        retrofit = RetrofitUtil.createRetrofit();
+        service = RetrofitUtil.createService(retrofit);
 
-        vb.checkSenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (vb.checkSenha.isChecked()) {
-                    vb.edtDigitePassword.setInputType(InputType.TYPE_CLASS_TEXT);
-                } else {
-                    vb.edtDigitePassword.setInputType(
-                            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
-                    );
-                }
-            }
-        });
+        vb.loginBtn.setOnClickListener(view -> {
+            String email = vb.edtDigiteEmail.getText().toString().trim();
 
+            if ( !email.isEmpty() ){
+                dialog_carregando.show();
 
-        btnLogin.setOnClickListener(vLogin ->{
-            dialog_carregando.show();
-            String email, senha;
-            email = vb.edtDigiteEmail.getText().toString().trim();
-            senha = vb.edtDigitePassword.getText().toString().trim();
-
-            if ( !email.isEmpty()  && !senha.isEmpty()){
-                auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(task -> {
-                    if ( task.isSuccessful() ){
+                service.getUsuarios().enqueue(new Callback<>() {
+                    @Override
+                    public void onResponse(Call<ModelResponse> call, Response<ModelResponse> response) {
                         dialog_carregando.dismiss();
-                        startActivity(
-                                new Intent(getApplicationContext(), ContadorPassosActivity.class)
-                        );
-                    }else{
+                        if (response.isSuccessful()) {
+
+                            boolean isEncontrado = false;
+                            assert response.body() != null;
+                            for (ModeloUsuarioKarine usuario : response.body().getData()) {
+
+                                if (usuario.getAttributes().getEmail().trim().equals(email)) {
+
+                                    Toast.makeText(LoginOuCadastroActivity.this, "Usuário Reconhecido", Toast.LENGTH_SHORT).show();
+                                    editor.putString("id", email);
+                                    startActivity(new Intent(LoginOuCadastroActivity.this, ContadorPassosActivity.class));
+                                    isEncontrado = true;
+                                }
+                            }
+
+                            if (!isEncontrado) {
+                                Toast.makeText(LoginOuCadastroActivity.this, "Usuário Não Encontrado!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelResponse> call, Throwable t) {
                         dialog_carregando.dismiss();
-                        Toast.makeText(LoginOuCadastroActivity.this, "Credenciais erradas.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginOuCadastroActivity.this, "Erro na requisição, tente novamente!", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else{
-                Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
-                dialog_carregando.dismiss();
             }
-
-
-        });
-
-
-        btnCad.setOnClickListener( viewCad -> {
-            startActivity(
-                    new Intent(getApplicationContext(), FormularioActivity.class)
-            );
         });
     }
 

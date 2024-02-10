@@ -68,42 +68,6 @@
 
             tools:ignore="TextContrastCheck,TextFields,VisualLintTextFieldSize" />
 
-        <TextView
-            android:id="@+id/txt_senha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/senha"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <CheckBox
-            android:id="@+id/check_senha"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:text="@string/mostrar_senha"
-            tools:ignore="VisualLintButtonSize" />
-
-        <EditText
-            android:id="@+id/edt_digite_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:autofillHints=""
-            android:background="@drawable/border_text"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/digite_sua_senha"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck,TextFields,VisualLintTextFieldSize" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
@@ -116,22 +80,6 @@
             android:textColor="@color/back_text"
             android:textStyle="bold"
             tools:ignore="VisualLintButtonSize,TextContrastCheck,DuplicateSpeakableTextCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_cad"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="75dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/border_button"
-            android:insetTop="6dp"
-            android:text="@string/cadastrar"
-            android:textColor="@color/back_text"
-            android:textStyle="bold"
-            tools:ignore="VisualLintButtonSize,TextContrastCheck" />
 
     </LinearLayout>
 
