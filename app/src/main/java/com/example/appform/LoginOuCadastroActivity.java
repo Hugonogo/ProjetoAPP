@@ -75,7 +75,7 @@ public class LoginOuCadastroActivity extends AppCompatActivity {
                                 if (usuario.getAttributes().getEmail().trim().equals(email)) {
 
                                     Toast.makeText(LoginOuCadastroActivity.this, "Usuário Reconhecido", Toast.LENGTH_SHORT).show();
-                                    editor.putString("id", email);
+                                    editor.putInt("id", usuario.getAttributes().getId()).apply();
                                     startActivity(new Intent(LoginOuCadastroActivity.this, ContadorPassosActivity.class));
                                     isEncontrado = true;
                                 }
@@ -90,6 +90,7 @@ public class LoginOuCadastroActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ModelResponse> call, Throwable t) {
                         dialog_carregando.dismiss();
+                        Log.d("mayara", "onFailure: " + t.getMessage());
                         Toast.makeText(LoginOuCadastroActivity.this, "Erro na requisição, tente novamente!", Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -1,82 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContadorPassosActivity"
     android:orientation="vertical"
-    android:gravity="center">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    android:padding="8dp"
+    tools:context=".ContadorPassosActivity">
+
+    <Button
+        android:id="@+id/btn_cadastrar_atitivade"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
-        <TextView
-            android:id="@+id/Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:layout_centerHorizontal="true"
-            android:text=""
-            android:textColor="#1565C0"
-            android:textSize="30sp"
-            tools:ignore="VisualLintOverlap" />
-        <ProgressBar
-            android:id="@+id/progres_steps"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:background="@drawable/circle_one"
-            android:max="5000"
-            android:progressDrawable="@drawable/progress_circle" />
+        android:background="@drawable/border_button"
+        android:text="Cadastrar Atividade Física"
+        android:textColor="@color/color_prox_text" />
 
-        <TextView
-            android:id="@+id/Count_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Suas Atividades Físicas:" />
 
-            android:layout_centerInParent="true"
-            android:text="@string/passos"
-            android:textColor="#1565C0"
-            android:textSize="30sp"
-            tools:ignore="VisualLintOverlap" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-
-        <Button
-            android:id="@+id/IniciarButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="290dp"
-            android:text="@string/iniciar"
-            />
-        <Button
-            android:id="@+id/cadastrarPassosButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="290dp"
-            android:text="@string/cadastrar_passos"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BorgButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="350dp"
-            android:text="@string/cadastrar_atividade" />
-
-        <Button
-            android:id="@+id/acelerometroButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="400dp"
-            android:text="@string/acelerometro" />
-
-    </RelativeLayout>
-
-
-</RelativeLayout>
+</LinearLayout>

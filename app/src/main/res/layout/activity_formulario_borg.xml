@@ -8,15 +8,15 @@
     android:orientation="vertical"
 
     tools:context=".BorgActivity">
+
     <LinearLayout
         android:layout_width="361dp"
-        android:layout_height="481dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@drawable/border_background"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        tools:ignore="TextSizeCheck"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        tools:ignore="TextSizeCheck">
 
         <TextView
             android:id="@+id/text_desc_atividade"
@@ -72,7 +72,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/edt_pass"
+            android:id="@+id/edt_minutos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -82,22 +82,22 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/preencher_tempo"
+            android:inputType="number|numberDecimal"
             android:minHeight="48dp"
             android:textColorHint="#757575"
             tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck"
             tools:layout_editor_absoluteX="34dp"
-            tools:layout_editor_absoluteY="238dp"
-            android:inputType="number|numberDecimal" />
+            tools:layout_editor_absoluteY="238dp" />
 
         <TextView
             android:id="@+id/txt_IntensidadeBorg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Intensidade"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
+            android:text="@string/Intensidade"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spinner_Borg"
@@ -117,16 +117,86 @@
             tools:layout_editor_absoluteX="34dp"
             tools:layout_editor_absoluteY="304dp" />
 
+        <TextView
+            android:id="@+id/txt_IntensidadeBorg2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:text="Passos dado"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edt_pass2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="( opcional )"
+            android:inputType="number|numberDecimal"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="238dp" />
+
+        <TextView
+            android:id="@+id/txt_IntensidadeBorg3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:text="Distância em metros"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edt_distancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:autofillHints=""
+            android:background="@drawable/border_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="( opcional )"
+            android:inputType="number|numberDecimal"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateClickableBoundsCheck,MissingConstraints,TextContrastCheck,VisualLintTextFieldSize,DuplicateSpeakableTextCheck"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="238dp" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/SalvarButton"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="75dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/border_button"
             android:text="@string/salvar_atividade"
+            android:textColor="@color/color_prox_text"
+            android:textSize="20sp"
+            tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/volarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/border_button"
+            android:text="Voltar"
             android:textColor="@color/color_prox_text"
             android:textSize="20sp"
             tools:ignore="VisualLintButtonSize,TextContrastCheck" />
