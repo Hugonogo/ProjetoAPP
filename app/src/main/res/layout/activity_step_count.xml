@@ -25,6 +25,7 @@
         android:text="Suas Atividades Físicas:" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerAtividades"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

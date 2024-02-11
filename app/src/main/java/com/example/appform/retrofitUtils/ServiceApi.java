@@ -4,6 +4,7 @@ import com.example.appform.model.ModelResponse;
 import com.example.appform.model.ModeloAtividadeFisica;
 import com.example.appform.model.ModeloBodyPostAtividade;
 import com.example.appform.model.ModeloRespostaAtividadeFisica;
+import com.example.appform.model.ModeloRespsotaListaAtividades;
 import com.example.appform.model.ModeloUsuarioKarine;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public interface ServiceApi {
 
     @GET("api/v1/profiles")
     Call<ModelResponse> getUsuarios ();
+
+    @GET("/api/v1/exercise_metrics")
+    Call<ModeloRespsotaListaAtividades> getAtividades (@Query("user_id") int id);
 
     @Headers({
             "Accept: application/json",

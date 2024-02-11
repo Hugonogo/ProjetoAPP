@@ -13,9 +13,26 @@ public class ModeloRespostaAtividadeFisica {
 
     // Inner class representing the data
     public static class Data {
+
+
+        @Override
+        public String toString() {
+            return
+                    "Id: " + id + '\n' +
+                    "Tipo: " + type + '\n' +
+                    "Atributos:" + '\n' +
+                            "Atividade" + attributes.getName()   + "\n" +
+                            "Itensidade" + attributes.getIntensity()   + "\n" +
+                            "Passos" + attributes.getSteps()  + "\n" +
+                            "Duração" + attributes.getDuration_in_min()   + "\n"  ;
+
+        }
+
         public String id;
         public String type;
         public Attributes attributes;
+
+
 
         public String getId() {
             return id;
@@ -48,6 +65,15 @@ public class ModeloRespostaAtividadeFisica {
         public String name;
         public String intensity;
         public int duration_in_min;
+        public int steps;
+
+        public int getSteps() {
+            return steps;
+        }
+
+        public void setSteps(int steps) {
+            this.steps = steps;
+        }
 
         public int getUser_id() {
             return user_id;

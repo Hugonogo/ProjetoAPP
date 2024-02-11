@@ -91,7 +91,9 @@ public class LoginOuCadastroActivity extends AppCompatActivity {
                     public void onFailure(Call<ModelResponse> call, Throwable t) {
                         dialog_carregando.dismiss();
                         Log.d("mayara", "onFailure: " + t.getMessage());
-                        Toast.makeText(LoginOuCadastroActivity.this, "Erro na requisição, tente novamente!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginOuCadastroActivity.this, t.getMessage() + ": tente novamente!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(LoginOuCadastroActivity.this, LoginOuCadastroActivity.class));
                     }
                 });
             }
