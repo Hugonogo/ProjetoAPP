@@ -19,12 +19,12 @@ public class ModeloRespostaAtividadeFisica {
         public String toString() {
             return
                     "Id: " + id + '\n' +
-                    "Tipo: " + type + '\n' +
+                    "Tipo: " + "Análise de Exercício" + '\n' +
                     "Atributos:" + '\n' +
-                            "Atividade" + attributes.getName()   + "\n" +
-                            "Itensidade" + attributes.getIntensity()   + "\n" +
-                            "Passos" + attributes.getSteps()  + "\n" +
-                            "Duração" + attributes.getDuration_in_min()   + "\n"  ;
+                            "Atividade: " + attributes.getName()   + "\n" +
+                            "Itensidade: " + attributes.getIntensity()   + "\n" +
+                            "Passos: " + attributes.getSteps()  + "\n" +
+                            "Duração: " + attributes.getDuration_in_min()   + "\n"  ;
 
         }
 
