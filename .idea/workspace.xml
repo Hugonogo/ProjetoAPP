@@ -26,12 +26,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddb476f-0aca-47b5-94bf-f9f71b7294ab" name="Changes" comment="Usando o acelerometro para calcular o nível de atividade física do usuário e armazenando no sqlite, informações de tipo de atividade, tempo de atividade (em minutos) e nivel de atividade física">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appform/AcelerometroService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="2ddb476f-0aca-47b5-94bf-f9f71b7294ab" name="Changes" comment="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/gc.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appform/AcelerometroActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appform/AcelerometroActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +47,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[0066516062]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -83,6 +89,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -324,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705783076238</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z">
+      <option name="closed" value="true" />
+      <created>1706030919254</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706030919254</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -361,6 +380,7 @@
     <MESSAGE value="Formulário Atualizado, informações adicionais e inserção dessas novas informações no banco" />
     <MESSAGE value="implementação inicial do acelerometro" />
     <MESSAGE value="Usando o acelerometro para calcular o nível de atividade física do usuário e armazenando no sqlite, informações de tipo de atividade, tempo de atividade (em minutos) e nivel de atividade física" />
-    <option name="LAST_COMMIT_MESSAGE" value="Usando o acelerometro para calcular o nível de atividade física do usuário e armazenando no sqlite, informações de tipo de atividade, tempo de atividade (em minutos) e nivel de atividade física" />
+    <MESSAGE value="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z" />
+    <option name="LAST_COMMIT_MESSAGE" value="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z" />
   </component>
 </project>
