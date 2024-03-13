@@ -36,12 +36,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddb476f-0aca-47b5-94bf-f9f71b7294ab" name="Changes" comment="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="2ddb476f-0aca-47b5-94bf-f9f71b7294ab" name="Changes" comment="Salvando registros em variáveis">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appform/AcelerometroActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appform/AcelerometroActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appform/database/ActivityDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appform/database/ActivityDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appform/database/PassosDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appform/database/PassosDataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,9 +117,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2SybBh6oPi912RD0jHYGByqSHcH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -372,7 +370,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707764340432</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Salvando registros em variáveis">
+      <option name="closed" value="true" />
+      <created>1710294144118</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710294144118</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -410,6 +416,7 @@
     <MESSAGE value="implementação inicial do acelerometro" />
     <MESSAGE value="Usando o acelerometro para calcular o nível de atividade física do usuário e armazenando no sqlite, informações de tipo de atividade, tempo de atividade (em minutos) e nivel de atividade física" />
     <MESSAGE value="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z" />
-    <option name="LAST_COMMIT_MESSAGE" value="Acelerometro rodando em segundo plano com wake locks, mensurando os niveis de atividade física por magnitude usando os counts dos eixos x, y e z" />
+    <MESSAGE value="Salvando registros em variáveis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Salvando registros em variáveis" />
   </component>
 </project>

@@ -291,10 +291,12 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
         }
 
     }
+
+//    Salva as informações das tabelas em variáveis
     @SuppressLint("Range")
     private void saveInfo(){
         HashMap<String, String> lastActivityData = activityDatabase.getLastActivityData();
-
+//        todas as variáveis da tabela de atividades
         lastId = lastActivityData.get("id");
         lastActivityType = lastActivityData.get("activityType");
         lastActivityTimeMinutes = lastActivityData.get("activityTimeMinutes");
@@ -304,6 +306,7 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
 
         if (cursor !=  null){
             cursor.moveToLast();
+//            variável passos pegando o ultimo registro da tabela passos
             passos = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_PASSOS));
         }
         cursor.close();
