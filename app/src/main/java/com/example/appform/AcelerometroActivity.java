@@ -27,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appform.database.ActivityDataModel;
 import com.example.appform.database.ActivityDatabase;
 import com.example.appform.database.CountsDatabase;
+import com.example.appform.database.PassosDBHelper;
+import com.example.appform.database.PassosDataSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +41,8 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     private final double nivelModerado = 15;
     private boolean isAcelerometroAtivo = false;
     private Button startStopButton;
-    private String niveis, eixoValues, atiValue;
+    private String niveis, eixoValues, atiValue, lastId, lastActivityType, lastActivityTimeMinutes,
+            lastActivityLevel;
     private TextView accelerationValues, activityLevel;
     float xAxis, zAxis, yAxis;
     double meX, meY, meZ;
@@ -51,6 +54,8 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
     private Spinner SpinerAtividade;
     private final int INTERVALO_SALVAR_DADOS = 5000; // 5 segundos em milissegundos
     private AcelerometroService acelerometroService;
+    private  int passos;
+    private PassosDataSource dataSource;
     @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SpinerAtividade.setAdapter(adapter);
         //float xAxis1 = acelerometroService.xAxis;
+        dataSource = new PassosDataSource(this);
 
 
         SpinerAtividade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -117,7 +123,6 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
 
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
@@ -165,6 +170,7 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
             calcularTempoTotal();
             salvarAtividade();
             mostrarTabelaNoLog();
+            saveInfo();
 
         }
 
@@ -283,5 +289,31 @@ public class AcelerometroActivity extends AppCompatActivity implements SensorEve
                     ", Tempo (min): " + activityData.get("activityTimeMinutes") +
                     ", Nível: " + activityData.get("activityLevel"));
         }
+
+    }
+    @SuppressLint("Range")
+    private void saveInfo(){
+        HashMap<String, String> lastActivityData = activityDatabase.getLastActivityData();
+
+        lastId = lastActivityData.get("id");
+        lastActivityType = lastActivityData.get("activityType");
+        lastActivityTimeMinutes = lastActivityData.get("activityTimeMinutes");
+        lastActivityLevel = lastActivityData.get("activityLevel");
+        dataSource.open();
+        Cursor cursor = dataSource.obterPassosDiarios();
+
+        if (cursor !=  null){
+            cursor.moveToLast();
+            passos = cursor.getInt(cursor.getColumnIndex(PassosDBHelper.COLUMN_PASSOS));
+        }
+        cursor.close();
+        dataSource.close();
+
+        Log.d("Ultimos registros", "ultimos registros:");
+        Log.d("Ultimos registros",
+                "Passos: "+passos+
+                        ", tipo: "+lastActivityType+
+                        ", level: "+lastActivityLevel);
+
     }
 }

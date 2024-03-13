@@ -79,6 +79,29 @@ public class ActivityDatabase extends SQLiteOpenHelper {
         return activityDataList;
     }
 
+    @SuppressLint("Range")
+    public HashMap<String, String> getLastActivityData() {
+        HashMap<String, String> lastActivityData = new HashMap<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Consulta SQL para selecionar o último registro da tabela
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL_ID + " DESC LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            // Preencher o HashMap com os dados do último registro
+            lastActivityData.put("id", String.valueOf(cursor.getInt(cursor.getColumnIndex(COL_ID))));
+            lastActivityData.put("activityType", cursor.getString(cursor.getColumnIndex(COL_ACTIVITY_TYPE)));
+            lastActivityData.put("activityTimeMinutes", String.valueOf(cursor.getInt(cursor.getColumnIndex(COL_ACTIVITY_TIME_MINUTES))));
+            lastActivityData.put("activityLevel", cursor.getString(cursor.getColumnIndex(COL_ACTIVITY_LEVEL)));
+            cursor.close();
+        }
+        db.close();
+
+        return lastActivityData;
+    }
+
+
 
 
 }
